@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --paper: #f3f0e8;
+  --paper-pure: #fffdf7;
+  --paper-muted: #e8e4da;
+  --ink: #0b1b33;
+  --ink-muted: #596273;
+  --ink-subtle: #303b4c;
+  --teal: #2dd4bf;
+  --teal-dark: #20bca8;
+  --line: rgba(11, 27, 51, 0.22);
+  --line-subtle: rgba(11, 27, 51, 0.12);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--paper);
+    color: var(--ink);
+  }
+
+  body {
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-sans), sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  ::selection {
+    background-color: var(--teal);
+    color: var(--ink);
+  }
+
+  /* Focus styling for keyboard accessibility */
+  :focus-visible {
+    outline: 2px solid var(--teal-dark);
+    outline-offset: 3px;
+  }
+}
+
+/* Animations with prefers-reduced-motion respect */
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-section {
+  animation: fadeInSlide 0.35s ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .fade-in-section {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Print styles */
+@media print {
+  body {
+    background: #ffffff;
+    color: #000000;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+}
+

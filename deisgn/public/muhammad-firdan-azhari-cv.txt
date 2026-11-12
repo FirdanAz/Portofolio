@@ -1,0 +1,37 @@
+MUHAMMAD FIRDAN AZHARI
+Full-Stack Developer
+Kudus, Jawa Tengah
+
+RINGKASAN
+Mahasiswa dan Full-Stack Developer yang membangun produk dari rancangan UI,
+implementasi frontend/mobile, REST API, hingga rilis.
+
+PENGALAMAN
+Mobile Developer — Digital Code (CV. Bahagia Putra)
+Maret 2024 — Maret 2025
+- Mengembangkan dan memelihara aplikasi Flutter.
+- Mengintegrasikan REST API dan berkolaborasi dengan tim backend serta desain.
+- Menangani perbaikan bug dan proses rilis.
+
+PROYEK
+Satu Desa — Full-Stack Developer
+Flutter, Laravel, MySQL
+Juara 3 Nasional GENETIC 2025.
+
+Notula — Full-Stack Developer
+Next.js, TypeScript, API
+
+NUSAVERSE — Frontend Developer
+Next.js, Tailwind CSS, Figma
+
+LadangNusa — Full-Stack Developer
+Flutter, Laravel, REST API
+
+KETERAMPILAN
+Mobile: Flutter, Dart, Firebase
+Backend: Laravel, PHP, REST API, MySQL
+Frontend: Next.js, React, TypeScript, Tailwind CSS
+Tools: Git, GitHub, Figma, Postman
+
+KONTAK
+Email: muhammadfirdanazhari@gmail.com

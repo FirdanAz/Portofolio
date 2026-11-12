@@ -1,0 +1,10 @@
+{
+  "description": "A quick-to-scan portfolio for full-stack developer Muhammad Firdan Azhari, showcasing projects, experience, skills, and contact details for recruiters.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

@@ -85,8 +85,8 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
             <span>KEMBALI KE BERANDA</span>
           </Link>
 
-          <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-wider text-ink-muted">
-            <span className="px-2 py-0.5 border border-line bg-paper-pure text-ink">
+          <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-wider text-white/50">
+            <span className="px-2 py-0.5 border border-white/[0.08] bg-[#141414] text-white">
               {project.platform === "mobile" ? "Mobile App" : "Web Platform"}
             </span>
             <span>STUDI KASUS / {project.number}</span>
@@ -94,52 +94,52 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
         </div>
 
         {/* Project Header */}
-        <header className="pt-10 pb-12 lg:pt-14 lg:pb-16 border-b border-ink">
-          <div className="flex items-center gap-3 font-mono text-[11px] font-semibold text-teal mb-4">
+        <header className="pt-10 pb-12 lg:pt-14 lg:pb-16 border-b border-white/[0.08]">
+          <div className="flex items-center gap-3 font-mono text-[11px] font-semibold text-accent-red mb-4">
             <span>PROYEK {project.number}</span>
             <span className="text-line">/</span>
-            <span className="text-ink-muted uppercase">{project.category}</span>
+            <span className="text-white/50 uppercase">{project.category}</span>
           </div>
 
-          <h1 className="font-display font-semibold text-[44px] sm:text-[62px] lg:text-[84px] leading-[0.95] tracking-tight text-ink max-w-[1100px] mb-8">
+          <h1 className="font-display font-semibold text-[44px] sm:text-[62px] lg:text-[84px] leading-[0.95] tracking-tight text-white max-w-[1100px] mb-8">
             {project.title}
           </h1>
 
-          <p className="text-[16px] sm:text-[18px] lg:text-[20px] leading-[1.6] text-ink-subtle max-w-[850px] font-medium">
+          <p className="text-[16px] sm:text-[18px] lg:text-[20px] leading-[1.6] text-white/70 max-w-[850px] font-medium">
             {project.details.overview}
           </p>
 
           {/* Quick Specifications Matrix */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-10 mt-10 border-t border-line">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-10 mt-10 border-t border-white/[0.08]">
             <div>
-              <span className="block font-mono text-[8px] uppercase tracking-wider text-ink-muted mb-1">
+              <span className="block font-mono text-[8px] uppercase tracking-wider text-white/50 mb-1">
                 Peran
               </span>
-              <b className="text-[12px] sm:text-[13px] font-semibold text-ink">
+              <b className="text-[12px] sm:text-[13px] font-semibold text-white">
                 {project.role}
               </b>
             </div>
             <div>
-              <span className="block font-mono text-[8px] uppercase tracking-wider text-ink-muted mb-1">
+              <span className="block font-mono text-[8px] uppercase tracking-wider text-white/50 mb-1">
                 Platform &amp; Kategori
               </span>
-              <b className="text-[12px] sm:text-[13px] font-semibold text-ink">
+              <b className="text-[12px] sm:text-[13px] font-semibold text-white">
                 {project.platform === "mobile" ? "Mobile" : "Web"} · {project.category}
               </b>
             </div>
             <div>
-              <span className="block font-mono text-[8px] uppercase tracking-wider text-ink-muted mb-1">
+              <span className="block font-mono text-[8px] uppercase tracking-wider text-white/50 mb-1">
                 Hasil Utama
               </span>
-              <b className="text-[12px] sm:text-[13px] font-semibold text-teal-dark">
+              <b className="text-[12px] sm:text-[13px] font-semibold text-accent-red">
                 {project.result}
               </b>
             </div>
             <div>
-              <span className="block font-mono text-[8px] uppercase tracking-wider text-ink-muted mb-1">
+              <span className="block font-mono text-[8px] uppercase tracking-wider text-white/50 mb-1">
                 Teknologi
               </span>
-              <b className="font-mono text-[10px] sm:text-[11px] font-medium text-ink">
+              <b className="font-mono text-[10px] sm:text-[11px] font-medium text-white">
                 {project.stack}
               </b>
             </div>
@@ -148,7 +148,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
 
         {/* Hero Visual Showcase — Customized by Platform */}
         <section
-          className="py-12 lg:py-16 border-b border-ink"
+          className="py-12 lg:py-16 border-b border-white/[0.08]"
           aria-labelledby="preview-heading"
         >
           <h2 id="preview-heading" className="sr-only">
@@ -157,10 +157,10 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
 
           {project.platform === "mobile" ? (
             /* Multi-Device Smartphone Showcase for Mobile Apps */
-            <div className="max-w-[1100px] mx-auto border border-ink bg-[#E8EFE8] py-10 px-4 sm:px-8">
+            <div className="max-w-[1100px] mx-auto border border-white/[0.08] bg-[#E8EFE8] py-10 px-4 sm:px-8">
               <div className="flex items-center justify-center gap-4 sm:gap-8 overflow-hidden">
                 {/* Main Screen */}
-                <div className="w-[185px] sm:w-[230px] aspect-[9/19] rounded-[28px] sm:rounded-[34px] border-[3.5px] border-ink bg-paper-pure shadow-lg overflow-hidden relative shrink-0">
+                <div className="w-[185px] sm:w-[230px] aspect-[9/19] rounded-[28px] sm:rounded-[34px] border-[3.5px] border-white/[0.08] bg-[#141414] shadow-lg overflow-hidden relative shrink-0">
                   <div
                     className="absolute top-2.5 left-1/2 -translate-x-1/2 w-14 h-3 bg-ink rounded-full z-10"
                     aria-hidden="true"
@@ -177,7 +177,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
 
                 {/* Second Feature Screen */}
                 {project.secondaryImage && (
-                  <div className="w-[185px] sm:w-[220px] aspect-[9/19] rounded-[28px] sm:rounded-[34px] border-[3px] border-ink/80 bg-paper-pure shadow-md overflow-hidden relative shrink-0">
+                  <div className="w-[185px] sm:w-[220px] aspect-[9/19] rounded-[28px] sm:rounded-[34px] border-[3px] border-white/[0.08]/80 bg-[#141414] shadow-md overflow-hidden relative shrink-0">
                     <div
                       className="absolute top-2.5 left-1/2 -translate-x-1/2 w-14 h-3 bg-ink/80 rounded-full z-10"
                       aria-hidden="true"
@@ -194,7 +194,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
 
                 {/* Third Feature Screen on larger screens */}
                 {project.galleryImages.length > 2 && (
-                  <div className="hidden md:block w-[205px] aspect-[9/19] rounded-[34px] border-[3px] border-ink/60 bg-paper-pure shadow-sm overflow-hidden relative opacity-90 shrink-0">
+                  <div className="hidden md:block w-[205px] aspect-[9/19] rounded-[34px] border-[3px] border-white/[0.08]/60 bg-[#141414] shadow-sm overflow-hidden relative opacity-90 shrink-0">
                     <div
                       className="absolute top-2.5 left-1/2 -translate-x-1/2 w-14 h-3 bg-ink/60 rounded-full z-10"
                       aria-hidden="true"
@@ -212,16 +212,16 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
             </div>
           ) : (
             /* Desktop Web Browser Showcase */
-            <div className="max-w-[1100px] mx-auto border border-ink bg-paper-card p-4 sm:p-8">
-              <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] border border-ink overflow-hidden bg-paper-pure shadow-sm">
+            <div className="max-w-[1100px] mx-auto border border-white/[0.08] bg-dark-card p-4 sm:p-8">
+              <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] border border-white/[0.08] overflow-hidden bg-[#141414] shadow-sm">
                 <div
-                  className="h-6 bg-paper-muted border-b border-ink/20 px-3 flex items-center gap-1.5"
+                  className="h-6 bg-dark-muted border-b border-white/[0.08]/20 px-3 flex items-center gap-1.5"
                   aria-hidden="true"
                 >
                   <span className="w-2 h-2 rounded-full bg-ink/40" />
                   <span className="w-2 h-2 rounded-full bg-ink/40" />
                   <span className="w-2 h-2 rounded-full bg-ink/40" />
-                  <span className="ml-4 text-[9px] font-mono text-ink-muted">
+                  <span className="ml-4 text-[9px] font-mono text-white/50">
                     https://{project.slug}.app
                   </span>
                 </div>
@@ -239,30 +239,30 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
             </div>
           )}
 
-          <p className="font-mono text-[9px] uppercase tracking-wider text-ink-muted text-center mt-4">
+          <p className="font-mono text-[9px] uppercase tracking-wider text-white/50 text-center mt-4">
             FIG. {project.number} — REPRESENTASI ANTARMUKA {project.title.toUpperCase()} (
             {project.platform === "mobile" ? "APLIKASI MOBILE FLUTTER" : "PLATFORM WEB NEXT.JS"})
           </p>
         </section>
 
         {/* Detailed Case Study Sections */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-12 lg:gap-16 py-14 lg:py-20 border-b border-ink">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-12 lg:gap-16 py-14 lg:py-20 border-b border-white/[0.08]">
           {/* Main Content Column */}
           <div className="flex flex-col gap-14">
             {/* 01: Problem Statement */}
             <section aria-labelledby="problem-heading">
               <div className="flex items-center gap-3 mb-4">
-                <span className="font-mono text-[10px] text-teal font-semibold">
+                <span className="font-mono text-[10px] text-accent-red font-semibold">
                   01
                 </span>
                 <h2
                   id="problem-heading"
-                  className="font-display font-semibold text-[26px] sm:text-[32px] text-ink"
+                  className="font-display font-semibold text-[26px] sm:text-[32px] text-white"
                 >
                   Masalah &amp; Latar Belakang
                 </h2>
               </div>
-              <p className="text-[14px] sm:text-[15px] leading-[1.8] text-ink-subtle">
+              <p className="text-[14px] sm:text-[15px] leading-[1.8] text-white/70">
                 {project.details.problemStatement}
               </p>
             </section>
@@ -270,17 +270,17 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
             {/* 02: Role & Architectural Responsibility */}
             <section aria-labelledby="role-heading">
               <div className="flex items-center gap-3 mb-4">
-                <span className="font-mono text-[10px] text-teal font-semibold">
+                <span className="font-mono text-[10px] text-accent-red font-semibold">
                   02
                 </span>
                 <h2
                   id="role-heading"
-                  className="font-display font-semibold text-[26px] sm:text-[32px] text-ink"
+                  className="font-display font-semibold text-[26px] sm:text-[32px] text-white"
                 >
                   Peran &amp; Tanggung Jawab
                 </h2>
               </div>
-              <p className="text-[14px] sm:text-[15px] leading-[1.8] text-ink-subtle">
+              <p className="text-[14px] sm:text-[15px] leading-[1.8] text-white/70">
                 {project.details.roleDescription}
               </p>
             </section>
@@ -288,12 +288,12 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
             {/* 03: Key Functional Features */}
             <section aria-labelledby="features-heading">
               <div className="flex items-center gap-3 mb-4">
-                <span className="font-mono text-[10px] text-teal font-semibold">
+                <span className="font-mono text-[10px] text-accent-red font-semibold">
                   03
                 </span>
                 <h2
                   id="features-heading"
-                  className="font-display font-semibold text-[26px] sm:text-[32px] text-ink"
+                  className="font-display font-semibold text-[26px] sm:text-[32px] text-white"
                 >
                   Fitur Utama
                 </h2>
@@ -302,12 +302,12 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                 {project.details.keyFeatures.map((feature, i) => (
                   <div
                     key={i}
-                    className="p-5 border border-line bg-paper-pure flex items-start gap-3.5"
+                    className="p-5 border border-white/[0.08] bg-[#141414] flex items-start gap-3.5"
                   >
-                    <span className="font-mono text-[10px] font-bold text-teal shrink-0 pt-0.5">
+                    <span className="font-mono text-[10px] font-bold text-accent-red shrink-0 pt-0.5">
                       0{i + 1}
                     </span>
-                    <p className="text-[13px] leading-relaxed text-ink-subtle">
+                    <p className="text-[13px] leading-relaxed text-white/70">
                       {feature}
                     </p>
                   </div>
@@ -318,12 +318,12 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
             {/* 04: Technical Highlights */}
             <section aria-labelledby="tech-heading">
               <div className="flex items-center gap-3 mb-4">
-                <span className="font-mono text-[10px] text-teal font-semibold">
+                <span className="font-mono text-[10px] text-accent-red font-semibold">
                   04
                 </span>
                 <h2
                   id="tech-heading"
-                  className="font-display font-semibold text-[26px] sm:text-[32px] text-ink"
+                  className="font-display font-semibold text-[26px] sm:text-[32px] text-white"
                 >
                   Sorotan Teknis &amp; Rekayasa
                 </h2>
@@ -332,7 +332,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                 {project.details.technicalHighlights.map((highlight, i) => (
                   <li
                     key={i}
-                    className="p-4 border-l-2 border-teal bg-paper-pure border-y border-r border-line text-[13px] sm:text-[14px] leading-relaxed text-ink-subtle"
+                    className="p-4 border-l-2 border-teal bg-[#141414] border-y border-r border-white/[0.08] text-[13px] sm:text-[14px] leading-relaxed text-white/70"
                   >
                     {highlight}
                   </li>
@@ -343,18 +343,18 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
             {/* 05: Outcomes and Impact */}
             <section aria-labelledby="outcomes-heading">
               <div className="flex items-center gap-3 mb-4">
-                <span className="font-mono text-[10px] text-teal font-semibold">
+                <span className="font-mono text-[10px] text-accent-red font-semibold">
                   05
                 </span>
                 <h2
                   id="outcomes-heading"
-                  className="font-display font-semibold text-[26px] sm:text-[32px] text-ink"
+                  className="font-display font-semibold text-[26px] sm:text-[32px] text-white"
                 >
                   Hasil &amp; Dampak
                 </h2>
               </div>
-              <div className="p-6 border border-ink bg-paper-card">
-                <p className="text-[14px] sm:text-[15px] leading-[1.75] text-ink font-semibold">
+              <div className="p-6 border border-white/[0.08] bg-dark-card">
+                <p className="text-[14px] sm:text-[15px] leading-[1.75] text-white font-semibold">
                   {project.details.outcomes}
                 </p>
               </div>
@@ -364,17 +364,17 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
             {project.galleryImages.length > 0 && (
               <section aria-labelledby="gallery-heading">
                 <div className="flex items-center gap-3 mb-4">
-                  <span className="font-mono text-[10px] text-teal font-semibold">
+                  <span className="font-mono text-[10px] text-accent-red font-semibold">
                     06
                   </span>
                   <h2
                     id="gallery-heading"
-                    className="font-display font-semibold text-[26px] sm:text-[32px] text-ink"
+                    className="font-display font-semibold text-[26px] sm:text-[32px] text-white"
                   >
                     Galeri Antarmuka &amp; Alur Fitur
                   </h2>
                 </div>
-                <p className="text-[13px] text-ink-muted mb-6">
+                <p className="text-[13px] text-white/50 mb-6">
                   {project.platform === "mobile"
                     ? "Tangkapan layar antarmuka aplikasi mobile dengan rasio layar smartphone utuh:"
                     : "Dokumentasi visual tangkapan layar antarmuka dari platform web yang dikembangkan:"}
@@ -386,9 +386,9 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                     {project.galleryImages.map((img, idx) => (
                       <figure
                         key={img.url + idx}
-                        className="border border-ink bg-paper-pure p-3 flex flex-col justify-between group hover:border-teal-dark transition-colors"
+                        className="border border-white/[0.08] bg-[#141414] p-3 flex flex-col justify-between group hover:border-teal-dark transition-colors"
                       >
-                        <div className="w-full aspect-[9/18.5] border border-ink/80 rounded-[20px] overflow-hidden relative bg-paper-muted shadow-sm">
+                        <div className="w-full aspect-[9/18.5] border border-white/[0.08]/80 rounded-[20px] overflow-hidden relative bg-dark-muted shadow-sm">
                           {/* Mini Notch */}
                           <div
                             className="absolute top-1.5 left-1/2 -translate-x-1/2 w-8 h-1.5 bg-ink/80 rounded-full z-10"
@@ -402,8 +402,8 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                           />
                         </div>
-                        <figcaption className="pt-3 font-mono text-[8px] uppercase tracking-wider text-ink-subtle">
-                          <b className="text-teal font-bold mr-1.5">
+                        <figcaption className="pt-3 font-mono text-[8px] uppercase tracking-wider text-white/70">
+                          <b className="text-accent-red font-bold mr-1.5">
                             #{idx + 1}
                           </b>
                           <span>{img.caption}</span>
@@ -417,9 +417,9 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                     {project.galleryImages.map((img, idx) => (
                       <figure
                         key={img.url + idx}
-                        className="border border-ink bg-paper-pure p-3 flex flex-col justify-between group hover:border-teal-dark transition-colors"
+                        className="border border-white/[0.08] bg-[#141414] p-3 flex flex-col justify-between group hover:border-teal-dark transition-colors"
                       >
-                        <div className="relative w-full aspect-[16/10] border border-line overflow-hidden bg-paper-muted">
+                        <div className="relative w-full aspect-[16/10] border border-white/[0.08] overflow-hidden bg-dark-muted">
                           <Image
                             src={img.url}
                             alt={img.alt}
@@ -428,8 +428,8 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                             sizes="(max-width: 768px) 100vw, 500px"
                           />
                         </div>
-                        <figcaption className="pt-3 font-mono text-[8px] uppercase tracking-wider text-ink-subtle">
-                          <b className="text-teal font-bold mr-1.5">
+                        <figcaption className="pt-3 font-mono text-[8px] uppercase tracking-wider text-white/70">
+                          <b className="text-accent-red font-bold mr-1.5">
                             #{idx + 1}
                           </b>
                           <span>{img.caption}</span>
@@ -443,17 +443,17 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
           </div>
 
           {/* Sticky Sidebar for Stack & External Links */}
-          <aside className="lg:border-l lg:border-line lg:pl-10 flex flex-col gap-10">
+          <aside className="lg:border-l lg:border-white/[0.08] lg:pl-10 flex flex-col gap-10">
             {/* Tech Stack */}
             <div>
-              <h3 className="font-mono text-[9px] uppercase tracking-wider text-ink-muted mb-4 pb-2 border-b border-line">
+              <h3 className="font-mono text-[9px] uppercase tracking-wider text-white/50 mb-4 pb-2 border-b border-white/[0.08]">
                 Teknologi yang Digunakan
               </h3>
               <div className="flex flex-wrap gap-2">
                 {project.stackList.map((tech) => (
                   <span
                     key={tech}
-                    className="border border-line py-1.5 px-3 font-mono text-[9px] uppercase tracking-wider text-ink bg-paper-pure"
+                    className="border border-white/[0.08] py-1.5 px-3 font-mono text-[9px] uppercase tracking-wider text-white bg-[#141414]"
                   >
                     {tech}
                   </span>
@@ -463,35 +463,35 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
 
             {/* Project Artifact Links */}
             <div>
-              <h3 className="font-mono text-[9px] uppercase tracking-wider text-ink-muted mb-4 pb-2 border-b border-line">
+              <h3 className="font-mono text-[9px] uppercase tracking-wider text-white/50 mb-4 pb-2 border-b border-white/[0.08]">
                 Tautan &amp; Repositori
               </h3>
               <div className="flex flex-col gap-4">
-                <div className="p-4 border border-ink bg-paper-pure flex flex-col gap-1.5">
-                  <span className="font-mono text-[8px] uppercase tracking-wider text-ink-muted">
+                <div className="p-4 border border-white/[0.08] bg-[#141414] flex flex-col gap-1.5">
+                  <span className="font-mono text-[8px] uppercase tracking-wider text-white/50">
                     Kode Sumber
                   </span>
                   <a
                     href={project.details.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-mono text-[11px] font-bold text-ink hover:text-teal-dark inline-flex items-center justify-between"
+                    className="font-mono text-[11px] font-bold text-white hover:text-accent-red inline-flex items-center justify-between"
                   >
                     <span>Kunjungi Repositori GitHub</span>
-                    <span aria-hidden="true" className="text-teal font-sans">
+                    <span aria-hidden="true" className="text-accent-red font-sans">
                       ↗
                     </span>
                   </a>
-                  <span className="font-mono text-[8px] text-teal-dark mt-1 break-all">
+                  <span className="font-mono text-[8px] text-accent-red mt-1 break-all">
                     {project.details.githubUrl}
                   </span>
                 </div>
 
-                <div className="p-4 border border-line bg-paper-pure flex flex-col gap-1.5">
-                  <span className="font-mono text-[8px] uppercase tracking-wider text-ink-muted">
+                <div className="p-4 border border-white/[0.08] bg-[#141414] flex flex-col gap-1.5">
+                  <span className="font-mono text-[8px] uppercase tracking-wider text-white/50">
                     Live Demo / Video
                   </span>
-                  <div className="text-[12px] text-ink-subtle">
+                  <div className="text-[12px] text-white/70">
                     {project.details.demoUrl}
                   </div>
                 </div>
@@ -499,11 +499,11 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
             </div>
 
             {/* Developer Contact Quick Card */}
-            <div className="p-5 border border-ink bg-paper-pure">
-              <span className="font-mono text-[8px] uppercase tracking-wider text-teal-dark font-semibold block mb-1">
+            <div className="p-5 border border-white/[0.08] bg-[#141414]">
+              <span className="font-mono text-[8px] uppercase tracking-wider text-accent-red font-semibold block mb-1">
                 KONSULTASI &amp; PERTANYAAN
               </span>
-              <p className="text-[12px] text-ink-subtle leading-relaxed mb-4">
+              <p className="text-[12px] text-white/70 leading-relaxed mb-4">
                 Tertarik mendiskusikan implementasi teknis atau kode sumber dari
                 proyek ini?
               </p>
@@ -511,10 +511,10 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                 href={`mailto:${content.contact.email}?subject=Diskusi Proyek ${encodeURIComponent(
                   project.title
                 )}`}
-                className="font-mono text-[10px] font-bold uppercase tracking-wider border-b border-ink pb-1 hover:text-teal-dark hover:border-teal-dark transition-colors inline-flex items-center gap-1.5"
+                className="font-mono text-[10px] font-bold uppercase tracking-wider border-b border-white/[0.08] pb-1 hover:text-accent-red hover:border-teal-dark transition-colors inline-flex items-center gap-1.5"
               >
                 <span>Kirim Pertanyaan</span>
-                <span aria-hidden="true" className="text-teal font-sans">
+                <span aria-hidden="true" className="text-accent-red font-sans">
                   ↗
                 </span>
               </a>
@@ -524,23 +524,23 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
 
         {/* Bottom Pagination to Next / Prev Projects */}
         <nav
-          className="grid grid-cols-1 sm:grid-cols-2 border-b border-ink font-mono text-[11px]"
+          className="grid grid-cols-1 sm:grid-cols-2 border-b border-white/[0.08] font-mono text-[11px]"
           aria-label="Navigasi antar proyek"
         >
           {prevProject ? (
             <Link
               href={`/projects/${prevProject.slug}`}
-              className="p-6 sm:p-8 border-b sm:border-b-0 sm:border-r border-ink hover:bg-paper-pure transition-colors group flex flex-col"
+              className="p-6 sm:p-8 border-b sm:border-b-0 sm:border-r border-white/[0.08] hover:bg-[#141414] transition-colors group flex flex-col"
             >
-              <span className="text-[9px] uppercase tracking-wider text-ink-muted mb-1">
+              <span className="text-[9px] uppercase tracking-wider text-white/50 mb-1">
                 ← Proyek Sebelumnya
               </span>
-              <span className="font-display font-semibold text-[20px] text-ink group-hover:text-teal-dark transition-colors">
+              <span className="font-display font-semibold text-[20px] text-white group-hover:text-accent-red transition-colors">
                 {prevProject.title}
               </span>
             </Link>
           ) : (
-            <div className="p-6 sm:p-8 border-b sm:border-b-0 sm:border-r border-ink text-ink-muted/50 hidden sm:block">
+            <div className="p-6 sm:p-8 border-b sm:border-b-0 sm:border-r border-white/[0.08] text-white/50/50 hidden sm:block">
               <span className="text-[9px] uppercase tracking-wider">
                 Awal Katalog Proyek
               </span>
@@ -550,17 +550,17 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
           {nextProject ? (
             <Link
               href={`/projects/${nextProject.slug}`}
-              className="p-6 sm:p-8 hover:bg-paper-pure transition-colors group flex flex-col sm:items-end text-left sm:text-right"
+              className="p-6 sm:p-8 hover:bg-[#141414] transition-colors group flex flex-col sm:items-end text-left sm:text-right"
             >
-              <span className="text-[9px] uppercase tracking-wider text-ink-muted mb-1">
+              <span className="text-[9px] uppercase tracking-wider text-white/50 mb-1">
                 Proyek Selanjutnya →
               </span>
-              <span className="font-display font-semibold text-[20px] text-ink group-hover:text-teal-dark transition-colors">
+              <span className="font-display font-semibold text-[20px] text-white group-hover:text-accent-red transition-colors">
                 {nextProject.title}
               </span>
             </Link>
           ) : (
-            <div className="p-6 sm:p-8 text-ink-muted/50 hidden sm:flex flex-col items-end">
+            <div className="p-6 sm:p-8 text-white/50/50 hidden sm:flex flex-col items-end">
               <span className="text-[9px] uppercase tracking-wider">
                 Akhir Katalog Proyek
               </span>

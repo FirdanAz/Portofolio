@@ -32,19 +32,37 @@ export function Contact() {
           </em>
         </h2>
 
-        <a
-          href={`mailto:${contact.email}`}
-          className="inline-flex items-center text-[13px] sm:text-[14px] font-bold border-b border-ink pb-2 text-ink hover:text-teal-dark hover:border-teal-dark transition-colors w-max"
-          aria-label={`Kirim email ke ${contact.email}`}
-        >
-          <span>{contact.email}</span>
-          <span
-            aria-hidden="true"
-            className="text-teal ml-3 text-[16px] font-sans"
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+          <a
+            href={`mailto:${contact.email}`}
+            className="inline-flex items-center text-[13px] sm:text-[14px] font-bold border-b border-ink pb-2 text-ink hover:text-teal-dark hover:border-teal-dark transition-colors w-max"
+            aria-label={`Kirim email ke ${contact.email}`}
           >
-            ↗
-          </span>
-        </a>
+            <span>{contact.email}</span>
+            <span
+              aria-hidden="true"
+              className="text-teal ml-2.5 text-[16px] font-sans"
+            >
+              ↗
+            </span>
+          </a>
+
+          <a
+            href={contact.phone.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center text-[12px] sm:text-[13px] font-mono font-semibold border-b border-ink pb-2 text-ink hover:text-teal-dark hover:border-teal-dark transition-colors w-max"
+            aria-label={`Hubungi via WhatsApp ${contact.phone.display}`}
+          >
+            <span>{contact.phone.display}</span>
+            <span
+              aria-hidden="true"
+              className="text-teal ml-2 text-[14px] font-sans"
+            >
+              ↗
+            </span>
+          </a>
+        </div>
       </div>
 
       {/* Links & metadata grid */}
@@ -60,7 +78,7 @@ export function Contact() {
             <span className="font-mono text-[8px] uppercase tracking-wider text-ink-muted">
               {contact.linkedin.label}
             </span>
-            <span className="font-semibold text-ink group-hover:text-teal-dark transition-colors mt-0.5">
+            <span className="font-semibold text-ink group-hover:text-teal-dark transition-colors mt-0.5 truncate max-w-[220px]">
               {contact.linkedin.display}
             </span>
           </div>
@@ -95,10 +113,10 @@ export function Contact() {
           </span>
         </a>
 
-        {/* Location */}
+        {/* Location & WhatsApp */}
         <div className="py-5 sm:py-6 px-2 sm:px-4 flex flex-col justify-center text-[12px]">
           <span className="font-mono text-[8px] uppercase tracking-wider text-ink-muted">
-            Lokasi
+            Lokasi &amp; Domisili
           </span>
           <span className="font-semibold text-ink mt-0.5">
             {contact.location}
@@ -108,4 +126,3 @@ export function Contact() {
     </section>
   );
 }
-

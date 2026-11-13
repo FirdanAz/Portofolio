@@ -45,6 +45,13 @@ export interface ExperienceItem {
   role: string;
   description: string;
   highlights: string[];
+  responsibilities: string[];
+}
+
+export interface EducationItem {
+  institution: string;
+  major: string;
+  period: string;
 }
 
 export interface SkillCategory {
@@ -57,6 +64,8 @@ export interface PortfolioContent {
     name: string;
     role: string;
     location: string;
+    phone: string;
+    phoneUrl: string;
     tagline: string;
     availability: string;
     sellingProposition: {
@@ -78,11 +87,17 @@ export interface PortfolioContent {
   };
   projects: Project[];
   experience: ExperienceItem[];
+  education: EducationItem[];
   skills: SkillCategory[];
   contact: {
     title: string;
     titleAccent: string;
     email: string;
+    phone: {
+      label: string;
+      display: string;
+      url: string;
+    };
     github: {
       label: string;
       url: string;
@@ -102,13 +117,15 @@ export const content: PortfolioContent = {
     name: "Muhammad Firdan Azhari",
     role: "Full-Stack Developer",
     location: "Kudus, Jawa Tengah",
+    phone: "+62 858-0342-6476",
+    phoneUrl: "https://wa.me/6285803426476",
     tagline: "Flutter · Laravel · Next.js",
     availability: "Tersedia untuk magang & kerja",
     sellingProposition: {
       headline: "Dari rancangan UI hingga API dan",
       accent: "rilis.",
       paragraph:
-        "Saya membangun produk digital secara utuh—menerjemahkan kebutuhan pengguna menjadi antarmuka yang jelas, backend REST API yang rapi, dan aplikasi yang siap diandalkan di lingkungan produksi.",
+        "Saya membangun produk digital secara utuh—menerjemahkan kebutuhan pengguna menjadi antarmuka yang cepat dan user-centered, arsitektur REST API yang rapi, dan aplikasi yang siap diandalkan di lingkungan produksi.",
       note: "Mahasiswa sekaligus pengembang perangkat lunak dengan pengalaman kerja nyata.",
     },
     quickFacts: [
@@ -129,9 +146,9 @@ export const content: PortfolioContent = {
       },
     ],
     aboutText: {
-      lead: "Saya Muhammad Firdan Azhari, mahasiswa dan Full-Stack Developer dari Kudus. Saya nyaman bekerja melintasi batas disiplin: dari iterasi desain di Figma, penulisan kode aplikasi mobile, hingga arsitektur REST API dan integrasi basis data tanpa kehilangan fokus pada detail pengalaman pengguna.",
+      lead: "Saya Muhammad Firdan Azhari, mahasiswa Sistem Informasi Universitas Semarang dan Software Developer dari Kudus. Saya memiliki fokus mendalam pada pengembangan aplikasi mobile yang scalable dan efisien menggunakan Flutter, dengan pondasi backend solid menggunakan Laravel dan Express.js.",
       objective:
-        "Fokus saat ini: bergabung dengan tim rekayasa perangkat lunak yang memprioritaskan kualitas teknis, memecahkan masalah nyata dengan dampak terukur, dan merilis produk yang benar-benar digunakan.",
+        "Fokus saat ini: bergabung dengan tim rekayasa perangkat lunak yang memprioritaskan kualitas kode, arsitektur modular (BLoC / Provider), serta merilis solusi fungsional yang memberi dampak nyata bagi pengguna dan bisnis.",
     },
     cvUrl: "/muhammad-firdan-azhari-cv.pdf",
   },
@@ -223,7 +240,7 @@ export const content: PortfolioContent = {
       category: "Productivity",
       platform: "mobile",
       problem:
-        "Mengubah rekaman suara dan percakapan rapat yang panjang menjadi notulensi terstruktur, pembagian action items, serta ekspor berkas .docx otomatis.",
+        "Aplikasi mobile asisten rapat tatap muka. Pengguna merekam audio rapat langsung dari ponsel, lalu mengunggahnya ke backend Laravel secara chunked dan idempoten (resumable) untuk menghasilkan notulensi terstruktur.",
       role: "Full-Stack Developer",
       stack: "FLUTTER  ·  LARAVEL  ·  REST API",
       stackList: ["Flutter", "Laravel", "REST API", "Chunked Upload", "Docx Generator"],
@@ -284,7 +301,7 @@ export const content: PortfolioContent = {
         },
         {
           url: "/projects/notula/07-clarify.png",
-          caption: "Klarifikasi dan Verifikasi Poin Notulensi",
+          caption: "Klarifikasi dan Verifikasi Poin Notulensi yang Meragukan",
           alt: "Layar klarifikasi transkrip Notula",
         },
       ],
@@ -298,20 +315,21 @@ export const content: PortfolioContent = {
       ],
       details: {
         overview:
-          "Notula adalah asisten rapat mobile yang menyelesaikan permasalahan utama pencatatan rapat: kegagalan unggah file audio besar, pencatatan manual yang memakan waktu, dan format laporan akhir yang berantakan.",
+          "Notula adalah asisten rapat mobile yang menyelesaikan permasalahan utama dokumentasi rapat: kegagalan unggah file audio besar, pencatatan manual yang memakan waktu, dan format laporan akhir yang berantakan.",
         problemStatement:
           "File audio durasi panjang sering gagal diunggah karena batas timeout server atau sinyal seluler yang fluktuatif di ruang rapat, sementara penulisan dokumen resmi pasca-rapat kerap tertunda berhari-hari.",
         roleDescription:
           "Mengembangkan aplikasi Flutter dari perekam audio hingga antarmuka editor, serta membangun backend Laravel dengan protokol chunked & resumable upload serta integrasi generator file .docx.",
         keyFeatures: [
-          "Modul perekaman audio built-in dengan jeda dan stempel waktu transkrip.",
-          "Sistem pengunggahan chunked & resumable yang dapat melanjutkan unggahan otomatis saat koneksi internet pulih.",
-          "Strukturisasi cerdas notulensi menjadi pembagian: Agenda, Keputusan Utama, dan Tindak Lanjut (Action Items).",
-          "Ekspor dokumen notulen instan ke berkas berekstensi .docx yang siap diarsipkan atau dicetak.",
+          "Perekaman audio rapat langsung dari perangkat ponsel dengan visual waveform.",
+          "Unggah berkas audio secara chunked dan idempoten (resumable) ke backend Laravel.",
+          "Strukturisasi notulen rapat otomatis menjadi ringkasan, kesimpulan, dan action items.",
+          "Verifikasi maksimal 5 temuan yang meragukan (klarifikasi) sebelum ekspor dokumen.",
+          "Ekspor otomatis risalah rapat langsung ke format Microsoft Word (.docx) siap pakai.",
         ],
         technicalHighlights: [
           "Protokol chunked upload di Laravel dengan kalkulasi checksum hash SHA-256 untuk memastikan keutuhan berkas audio.",
-          "Antarmuka Flutter berbasis clean architecture dan reactive state untuk kontrol audio yang mulus.",
+          "Arsitektur Flutter berbasis State Management (BLoC / Provider) untuk kontrol audio yang mulus dan bebas lag.",
           "Pembangkitan berkas dokumen Word (.docx) berbasis template XML kustom di sisi server.",
         ],
         outcomes:
@@ -468,39 +486,64 @@ export const content: PortfolioContent = {
       periodShort: "MAR 2024\n— MAR 2025",
       company: "Digital Code",
       parentCompany: "CV. Bahagia Putra",
-      role: "Mobile Developer",
+      role: "Mobile Developer (Full-Time)",
       description:
-        "Mengembangkan dan memelihara aplikasi mobile berbasis Flutter di lingkungan produksi komersial, mengintegrasikan endpoint REST API yang kompleks, serta berkolaborasi aktif dengan perancang antarmuka dan pengembang backend untuk menjamin kualitas rilis yang stabil.",
-      highlights: [
-        "Pengembangan Fitur Flutter",
-        "Integrasi REST API & Validasi Data",
-        "State Management & Optimalisasi UI",
-        "Perbaikan Bug & Prosedur Rilis",
+        "Bekerja penuh waktu mengembangkan dan memelihara aplikasi mobile berbasis Flutter di lingkungan produksi komersial, merancang arsitektur bersih dengan State Management modular, serta berkolaborasi lintas divisi dengan tim backend dan UI/UX.",
+      responsibilities: [
+        "Mengembangkan dan memelihara aplikasi mobile berbasis Flutter.",
+        "Berkolaborasi dengan tim backend untuk integrasi API dan peningkatan performa aplikasi.",
+        "Berkontribusi pada desain antarmuka (UI/UX) serta proses pengujian aplikasi.",
+        "Merancang arsitektur aplikasi dengan State Management (BLoC, Provider, Riverpod) agar kode bersih, modular, dan mudah di-maintain.",
+        "Menyusun dokumentasi teknis dan mendukung code review untuk menjaga konsistensi dan kualitas.",
+        "Melakukan pengujian fungsional, regression testing, dan debugging dengan Flutter DevTools untuk mengurangi defect.",
       ],
+      highlights: [
+        "Flutter (Dart) & Java Native",
+        "BLoC, Provider & Riverpod",
+        "RESTful API & JSON Integration",
+        "Flutter DevTools & Regression Testing",
+      ],
+    },
+  ],
+  education: [
+    {
+      institution: "Universitas Semarang",
+      major: "Sistem Informasi",
+      period: "2024 – Saat ini",
+    },
+    {
+      institution: "SMK Raden Umar Said",
+      major: "Rekayasa Perangkat Lunak",
+      period: "2021 – 2024",
     },
   ],
   skills: [
     {
       category: "MOBILE",
-      skills: "Flutter, Dart, Firebase, State Management (Bloc / Provider)",
+      skills: "Flutter (Dart), Java Native Android, BLoC, Provider, Riverpod, Firebase",
     },
     {
       category: "BACKEND",
-      skills: "Laravel, PHP, REST API, MySQL, Relational Database Design",
+      skills: "Laravel, Express.js, RESTful API & JSON, MySQL, Database Architecture",
     },
     {
       category: "FRONTEND",
-      skills: "Next.js, React, TypeScript, Tailwind CSS, HTML5 & Modern CSS",
+      skills: "Next.js, React, TypeScript, Tailwind CSS, Responsive UI, Component-Based Architecture",
     },
     {
-      category: "TOOLS & WORKFLOW",
-      skills: "Git, GitHub, Figma, Postman, Linux Basics, Vercel",
+      category: "TOOLS & TESTING",
+      skills: "Git, GitHub, Figma, Postman, Flutter DevTools, Vercel, Linux Basics",
     },
   ],
   contact: {
     title: "Mari bicara tentang",
     titleAccent: "kesempatan.",
     email: "muhammadfirdanazhari@gmail.com",
+    phone: {
+      label: "WhatsApp / Telepon",
+      display: "+62 858-0342-6476",
+      url: "https://wa.me/6285803426476",
+    },
     github: {
       label: "GitHub",
       url: "https://github.com/FirdanAz",

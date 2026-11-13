@@ -47,13 +47,16 @@
   ::-webkit-scrollbar {
     width: 7px;
   }
+
   ::-webkit-scrollbar-track {
     background: #050505;
   }
+
   ::-webkit-scrollbar-thumb {
     background: #222222;
     border-radius: 4px;
   }
+
   ::-webkit-scrollbar-thumb:hover {
     background: var(--accent-red);
   }
@@ -61,20 +64,16 @@
 
 /* Red radial glows */
 .glow-hero-red {
-  background: radial-gradient(
-    circle at 50% 45%,
-    rgba(225, 29, 46, 0.25) 0%,
-    rgba(225, 29, 46, 0.08) 35%,
-    rgba(5, 5, 5, 0) 70%
-  );
+  background: radial-gradient(circle at 50% 45%,
+      rgba(225, 29, 46, 0.25) 0%,
+      rgba(225, 29, 46, 0.08) 35%,
+      rgba(5, 5, 5, 0) 70%);
 }
 
 .glow-card-red {
-  background: radial-gradient(
-    circle at 50% 100%,
-    rgba(225, 29, 46, 0.2) 0%,
-    rgba(5, 5, 5, 0) 70%
-  );
+  background: radial-gradient(circle at 50% 100%,
+      rgba(225, 29, 46, 0.2) 0%,
+      rgba(5, 5, 5, 0) 70%);
 }
 
 /* Reduced motion preference */

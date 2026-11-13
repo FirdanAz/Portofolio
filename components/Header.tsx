@@ -47,11 +47,10 @@ export function Header() {
     <>
       {/* Fixed Transparent Header */}
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
             ? "bg-[#050505]/85 backdrop-blur-md border-b border-white/[0.08] py-4"
             : "bg-transparent py-6 lg:py-7 border-b border-white/[0.04]"
-        }`}
+          }`}
       >
         <div className="max-w-[1500px] mx-auto px-6 sm:px-10 flex items-center justify-between">
           {/* Wordmark Logo */}
@@ -79,9 +78,8 @@ export function Header() {
                 <Link
                   key={item.id}
                   href={item.href}
-                  className={`font-mono text-[11px] lg:text-[12px] font-bold tracking-[0.2em] transition-colors py-1 relative ${
-                    isActive ? "text-white" : "text-white/60 hover:text-white"
-                  }`}
+                  className={`font-mono text-[11px] lg:text-[12px] font-bold tracking-[0.2em] transition-colors py-1 relative ${isActive ? "text-white" : "text-white/60 hover:text-white"
+                    }`}
                 >
                   {item.label}
                   {isActive && (
@@ -141,9 +139,8 @@ export function Header() {
                 key={item.id}
                 href={item.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className={`font-mono text-[12px] font-bold tracking-[0.2em] py-1 ${
-                  activeSection === item.id ? "text-accent-red" : "text-white/70"
-                }`}
+                className={`font-mono text-[12px] font-bold tracking-[0.2em] py-1 ${activeSection === item.id ? "text-accent-red" : "text-white/70"
+                  }`}
               >
                 {item.label}
               </Link>

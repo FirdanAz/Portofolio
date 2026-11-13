@@ -178,7 +178,7 @@ export function Hero() {
 
       {/* Below Hero Stage: Role Brief, Value Statement & Quick Facts */}
       <div className="relative z-30 border-t border-white/[0.08] bg-[#070707]/95 backdrop-blur-md">
-        <div className="max-w-[1500px] mx-auto px-5 sm:px-8 lg:px-12 py-10 lg:py-14">
+        <div className="max-w-[1500px] mx-auto px-5 sm:px-8 lg:px-12 pt-10 sm:pt-12 lg:pt-16 pb-24 sm:pb-28 lg:pb-36">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
             {/* Left Column: Role & Selling Value Statement */}
             <div className="lg:col-span-7 flex flex-col gap-4">

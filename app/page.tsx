@@ -3,6 +3,7 @@ import { Hero } from "@/components/Hero";
 import { About } from "@/components/About";
 import { Marquee } from "@/components/Marquee";
 import { ProjectList } from "@/components/ProjectList";
+import { CredentialsCarousel } from "@/components/CredentialsCarousel";
 import { Experience } from "@/components/Experience";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
@@ -16,12 +17,9 @@ export default function Home() {
         <About />
         <Marquee />
         <div className="max-w-[1500px] mx-auto px-5 sm:px-8 lg:px-12">
-          <div id="project">
-            <ProjectList />
-          </div>
-          <div id="experience">
-            <Experience />
-          </div>
+          <ProjectList />
+          <CredentialsCarousel />
+          <Experience />
           <div id="contact">
             <Contact />
           </div>

@@ -162,7 +162,7 @@ export function About() {
   return (
     <section
       id="about"
-      className="relative w-full bg-panel-light text-black rounded-t-[60px] sm:rounded-t-[80px] lg:rounded-t-[100px] -mt-10 sm:-mt-14 lg:-mt-20 z-30 pt-16 sm:pt-24 lg:pt-32 pb-20 sm:pb-28 lg:pb-36 overflow-hidden shadow-[0_-20px_50px_rgba(0,0,0,0.45)]"
+      className="relative w-full bg-panel-light text-black rounded-t-[60px] sm:rounded-t-[80px] lg:rounded-t-[100px] -mt-8 sm:-mt-10 lg:-mt-14 z-30 pt-16 sm:pt-24 lg:pt-32 pb-20 sm:pb-28 lg:pb-36 overflow-hidden shadow-[0_-20px_50px_rgba(0,0,0,0.45)]"
       aria-labelledby="about-title"
     >
       {/* Faint Giant Background Watermark */}

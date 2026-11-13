@@ -65,17 +65,18 @@ export function Hero() {
 
       {/* Hero Visual Stage: Giant Typography + Glow + Cutout (Generous height & headroom) */}
       <div className="relative w-full h-[82vh] min-h-[580px] max-h-[820px] flex items-center justify-center overflow-hidden">
-        {/* Top Eyebrow Label & Status */}
-        <div className="absolute top-5 sm:top-7 inset-x-0 z-30 flex items-center justify-between max-w-[1500px] mx-auto px-5 sm:px-8 lg:px-12 pointer-events-none">
-          <div className="flex items-center gap-2 font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.22em] text-accent-red font-bold">
+        {/* Top Eyebrow Label & Status (Spacious on mobile and desktop) */}
+        <div className="absolute top-6 sm:top-7 inset-x-0 z-30 flex items-center justify-between max-w-[1500px] mx-auto px-5 sm:px-8 lg:px-12 pointer-events-none">
+          <div className="flex items-center gap-2 font-mono text-[10px] sm:text-[11px] leading-relaxed uppercase tracking-[0.22em] text-accent-red font-bold py-1">
             <span>[ 01 . PROFILE ]</span>
           </div>
-          <div className="flex items-center gap-2 font-mono text-[10px] sm:text-[11px] tracking-widest text-white/60">
+          <div className="flex items-center gap-2 font-mono text-[10px] sm:text-[11px] tracking-widest text-white/60 py-1">
             <span
               className="w-1.5 h-1.5 rounded-full bg-accent-red animate-pulse"
               aria-hidden="true"
             />
-            <span className="uppercase">{profile.availability}</span>
+            <span className="uppercase hidden sm:inline">{profile.availability}</span>
+            <span className="uppercase sm:hidden">TERSEDIA</span>
           </div>
         </div>
 
@@ -92,62 +93,74 @@ export function Hero() {
         />
 
         {/* Layer 1 (z-10): Giant Alternating Typography ("M FIRDAN" / "AZHARI") */}
-        <div className="absolute inset-x-0 top-[44%] sm:top-[42%] lg:top-[40%] -translate-y-1/2 z-10 flex items-center justify-center select-none pointer-events-none px-4">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentWord}
-              className="flex items-center justify-center font-display font-black tracking-[-0.04em] uppercase leading-none text-center whitespace-nowrap text-[clamp(3.4rem,11.5vw,12.5rem)] text-red-shimmer select-none drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)]"
-              aria-label={currentWord}
-            >
-              {characters.map((char, index) => {
-                if (char === " ") {
+        <div className="absolute inset-x-0 top-[40%] sm:top-[42%] lg:top-[40%] -translate-y-1/2 z-10 flex items-center justify-center select-none pointer-events-none px-2 sm:px-4">
+          <div className="relative flex items-center justify-center">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentWord}
+                className="flex items-center justify-center font-display font-black tracking-[-0.04em] uppercase leading-none text-white text-center whitespace-nowrap text-[68px] min-[380px]:text-[80px] sm:text-[100px] md:text-[124px] lg:text-[clamp(9rem,11.5vw,12.5rem)] drop-shadow-[0_10px_35px_rgba(0,0,0,0.85)]"
+                aria-label={currentWord}
+              >
+                {characters.map((char, index) => {
+                  if (char === " ") {
+                    return (
+                      <span
+                        key={`space-${index}`}
+                        className="inline-block w-3 sm:w-6 md:w-10 lg:w-14"
+                        aria-hidden="true"
+                      >
+                        &nbsp;
+                      </span>
+                    );
+                  }
                   return (
                     <span
-                      key={`space-${index}`}
-                      className="inline-block w-3 sm:w-6 md:w-10 lg:w-14"
-                      aria-hidden="true"
+                      key={`${char}-${index}`}
+                      className="inline-flex overflow-hidden h-[1.15em] items-center justify-center py-1"
                     >
-                      &nbsp;
+                      <motion.span
+                        className="inline-block will-change-transform text-white"
+                        initial={{ y: "105%", opacity: 0 }}
+                        animate={{
+                          y: "0%",
+                          opacity: 1,
+                          transition: {
+                            duration: 0.55,
+                            ease: [0.16, 1, 0.3, 1],
+                            delay: index * 0.035,
+                          },
+                        }}
+                        exit={{
+                          y: "-105%",
+                          opacity: 0,
+                          transition: {
+                            duration: 0.4,
+                            ease: [0.16, 1, 0.3, 1],
+                            delay: index * 0.02,
+                          },
+                        }}
+                      >
+                        {char}
+                      </motion.span>
                     </span>
                   );
-                }
-                return (
-                  <span
-                    key={`${char}-${index}`}
-                    className="inline-flex overflow-hidden h-[1.12em] items-center justify-center"
-                  >
-                    <motion.span
-                      className="inline-block will-change-transform text-inherit"
-                      initial={{ y: "105%", opacity: 0 }}
-                      animate={{
-                        y: "0%",
-                        opacity: 1,
-                        transition: {
-                          duration: 0.55,
-                          ease: [0.16, 1, 0.3, 1],
-                          delay: index * 0.035,
-                        },
-                      }}
-                      exit={{
-                        y: "-105%",
-                        opacity: 0,
-                        transition: {
-                          duration: 0.4,
-                          ease: [0.16, 1, 0.3, 1],
-                          delay: index * 0.02,
-                        },
-                      }}
-                    >
-                      {char}
-                    </motion.span>
-                  </span>
-                );
-              })}
-            </motion.div>
-          </AnimatePresence>
+                })}
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Metallic Red Shimmer Sweep Beam Overlay (Multiplies with white text to produce rich red shine) */}
+            <div
+              className="absolute inset-0 pointer-events-none select-none z-10 overflow-hidden mix-blend-multiply flex items-center justify-center"
+              aria-hidden="true"
+            >
+              <div className="w-[200%] h-full animate-beam-sweep flex items-center justify-center">
+                <div className="w-28 sm:w-44 lg:w-64 h-full bg-gradient-to-r from-white via-accent-red to-white transform -skew-x-20 opacity-95" />
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* Layer 2 (z-20): Portrait Cutout PNG Overlapping the Letters (Perfect Headroom) */}
+        {/* Layer 2 (z-20): Portrait Cutout PNG Overlapping the Letters (Perfect Headroom & Balanced on Mobile) */}
         <div
           className="absolute bottom-0 left-1/2 -translate-x-1/2 z-20 pointer-events-none flex justify-center items-end will-change-transform"
           style={{
@@ -165,7 +178,7 @@ export function Hero() {
               height={1243}
               priority
               unoptimized
-              className="h-[58vh] min-h-[380px] max-h-[560px] sm:h-[64vh] sm:max-h-[620px] lg:h-[70vh] lg:max-h-[660px] w-auto max-w-[92vw] object-contain object-bottom drop-shadow-[0_24px_48px_rgba(0,0,0,0.92)]"
+              className="h-[46vh] min-h-[290px] max-h-[420px] sm:h-[64vh] sm:min-h-[380px] sm:max-h-[620px] lg:h-[70vh] lg:max-h-[660px] w-auto max-w-[90vw] object-contain object-bottom drop-shadow-[0_24px_48px_rgba(0,0,0,0.92)]"
             />
             {/* Seamless bottom fade into #050505 */}
             <div

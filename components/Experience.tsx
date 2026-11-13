@@ -37,9 +37,8 @@ export function Experience() {
           {experience.map((item, index) => (
             <div
               key={item.company + item.period}
-              className={`grid grid-cols-[85px_24px_1fr] sm:grid-cols-[140px_30px_1fr] border-t border-ink pt-7 ${
-                index > 0 ? "mt-8" : ""
-              }`}
+              className={`grid grid-cols-[85px_24px_1fr] sm:grid-cols-[140px_30px_1fr] border-t border-ink pt-7 ${index > 0 ? "mt-8" : ""
+                }`}
             >
               {/* Timeline Date */}
               <div className="font-mono text-[9px] sm:text-[10px] uppercase text-ink-muted leading-[1.8]">

@@ -17,7 +17,7 @@ export function Hero() {
   useEffect(() => {
     const timer = setInterval(() => {
       setWordIndex((prev) => (prev + 1) % words.length);
-    }, 3400);
+    }, 3200);
     return () => clearInterval(timer);
   }, [words.length]);
 
@@ -57,16 +57,16 @@ export function Hero() {
 
   return (
     <section
-      className="relative w-full overflow-hidden bg-dark text-white border-b border-white/[0.08]"
+      className="relative w-full bg-dark text-white border-b border-white/[0.08]"
       aria-label="Hero Section"
     >
       {/* Background Red Floating Particles */}
       <ParticleBackground />
 
-      {/* Hero Visual Stage: Giant Typography + Glow + Cutout */}
-      <div className="relative w-full h-[68vh] min-h-[480px] max-h-[820px] sm:h-[72vh] lg:h-[78vh] flex items-center justify-center overflow-hidden">
-        {/* Eyebrow Label & Availability (Top Center/Left) */}
-        <div className="absolute top-4 sm:top-6 inset-x-0 z-30 flex items-center justify-between max-w-[1500px] mx-auto px-5 sm:px-8 lg:px-12 pointer-events-none">
+      {/* Hero Visual Stage: Giant Typography + Glow + Cutout (Generous height & headroom) */}
+      <div className="relative w-full h-[82vh] min-h-[580px] max-h-[820px] flex items-center justify-center overflow-hidden">
+        {/* Top Eyebrow Label & Status */}
+        <div className="absolute top-5 sm:top-7 inset-x-0 z-30 flex items-center justify-between max-w-[1500px] mx-auto px-5 sm:px-8 lg:px-12 pointer-events-none">
           <div className="flex items-center gap-2 font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.22em] text-accent-red font-bold">
             <span>[ 01 . PROFILE ]</span>
           </div>
@@ -79,24 +79,24 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Ambient Radial Red Glow Orb (behind cutout & text) */}
+        {/* Ambient Radial Red Glow Orb (centered behind head & upper torso) */}
         <div
-          className="absolute left-1/2 top-[46%] -translate-x-1/2 -translate-y-1/2 w-[320px] h-[320px] sm:w-[500px] sm:h-[500px] lg:w-[680px] lg:h-[680px] rounded-full glow-hero-red blur-3xl opacity-75 pointer-events-none z-[5]"
+          className="absolute left-1/2 top-[42%] -translate-x-1/2 -translate-y-1/2 w-[340px] h-[340px] sm:w-[520px] sm:h-[520px] lg:w-[680px] lg:h-[680px] rounded-full glow-hero-red blur-3xl opacity-75 pointer-events-none z-[5]"
           style={{
             transform: isReducedMotion
               ? "translate(-50%, -50%)"
-              : `translate(calc(-50% - ${mousePos.x * 0.6}px), calc(-50% - ${mousePos.y * 0.6}px))`,
+              : `translate(calc(-50% - ${mousePos.x * 0.5}px), calc(-50% - ${mousePos.y * 0.5}px))`,
             transition: "transform 0.25s cubic-bezier(0.2, 0, 0, 1)",
           }}
           aria-hidden="true"
         />
 
         {/* Layer 1 (z-10): Giant Alternating Typography ("M FIRDAN" / "AZHARI") */}
-        <div className="absolute inset-x-0 top-[30%] sm:top-[28%] lg:top-[26%] -translate-y-1/2 z-10 flex items-center justify-center select-none pointer-events-none px-4">
+        <div className="absolute inset-x-0 top-[44%] sm:top-[42%] lg:top-[40%] -translate-y-1/2 z-10 flex items-center justify-center select-none pointer-events-none px-4">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentWord}
-              className="flex items-center justify-center font-display font-black tracking-[-0.04em] uppercase leading-none text-white text-center text-[clamp(3.8rem,13vw,14rem)]"
+              className="flex items-center justify-center font-display font-black tracking-[-0.04em] uppercase leading-none text-white text-center whitespace-nowrap text-[clamp(3.4rem,11.5vw,12.5rem)]"
               aria-label={currentWord}
             >
               {characters.map((char, index) => {
@@ -104,7 +104,8 @@ export function Hero() {
                   return (
                     <span
                       key={`space-${index}`}
-                      className="inline-block w-4 sm:w-8 md:w-12 lg:w-16"
+                      className="inline-block w-3 sm:w-6 md:w-10 lg:w-14"
+                      aria-hidden="true"
                     >
                       &nbsp;
                     </span>
@@ -113,27 +114,27 @@ export function Hero() {
                 return (
                   <span
                     key={`${char}-${index}`}
-                    className="inline-block overflow-hidden py-1 sm:py-2"
+                    className="inline-flex overflow-hidden h-[1.12em] items-center justify-center"
                   >
                     <motion.span
-                      className="inline-block"
-                      initial={{ y: "115%", opacity: 0 }}
+                      className="inline-block will-change-transform"
+                      initial={{ y: "105%", opacity: 0 }}
                       animate={{
                         y: "0%",
                         opacity: 1,
                         transition: {
                           duration: 0.55,
                           ease: [0.16, 1, 0.3, 1],
-                          delay: index * 0.04,
+                          delay: index * 0.035,
                         },
                       }}
                       exit={{
-                        y: "-115%",
+                        y: "-105%",
                         opacity: 0,
                         transition: {
-                          duration: 0.38,
+                          duration: 0.4,
                           ease: [0.16, 1, 0.3, 1],
-                          delay: index * 0.025,
+                          delay: index * 0.02,
                         },
                       }}
                     >
@@ -146,7 +147,7 @@ export function Hero() {
           </AnimatePresence>
         </div>
 
-        {/* Layer 2 (z-20): Portrait Cutout PNG Overlapping the Letters */}
+        {/* Layer 2 (z-20): Portrait Cutout PNG Overlapping the Letters (Perfect Headroom) */}
         <div
           className="absolute bottom-0 left-1/2 -translate-x-1/2 z-20 pointer-events-none flex justify-center items-end will-change-transform"
           style={{
@@ -156,7 +157,7 @@ export function Hero() {
             transition: "transform 0.15s cubic-bezier(0.2, 0, 0, 1)",
           }}
         >
-          <div className="relative">
+          <div className="relative flex items-end justify-center">
             <Image
               src="/images/hero-cutout.png"
               alt={profile.name}
@@ -164,11 +165,11 @@ export function Hero() {
               height={1243}
               priority
               unoptimized
-              className="w-[280px] min-[400px]:w-[330px] sm:w-[420px] md:w-[490px] lg:w-[560px] xl:w-[620px] h-auto object-contain object-bottom drop-shadow-[0_24px_48px_rgba(0,0,0,0.9)]"
+              className="h-[58vh] min-h-[380px] max-h-[560px] sm:h-[64vh] sm:max-h-[620px] lg:h-[70vh] lg:max-h-[660px] w-auto max-w-[92vw] object-contain object-bottom drop-shadow-[0_24px_48px_rgba(0,0,0,0.92)]"
             />
             {/* Seamless bottom fade into #050505 */}
             <div
-              className="absolute inset-x-0 bottom-0 h-28 sm:h-36 bg-gradient-to-t from-dark via-dark/75 to-transparent pointer-events-none"
+              className="absolute inset-x-0 bottom-0 h-24 sm:h-32 bg-gradient-to-t from-dark via-dark/75 to-transparent pointer-events-none"
               aria-hidden="true"
             />
           </div>
@@ -176,7 +177,7 @@ export function Hero() {
       </div>
 
       {/* Below Hero Stage: Role Brief, Value Statement & Quick Facts */}
-      <div className="relative z-30 border-t border-white/[0.08] bg-[#070707]/90 backdrop-blur-md">
+      <div className="relative z-30 border-t border-white/[0.08] bg-[#070707]/95 backdrop-blur-md">
         <div className="max-w-[1500px] mx-auto px-5 sm:px-8 lg:px-12 py-10 lg:py-14">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
             {/* Left Column: Role & Selling Value Statement */}

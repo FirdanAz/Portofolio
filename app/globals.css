@@ -76,11 +76,39 @@
       rgba(5, 5, 5, 0) 70%);
 }
 
+/* Animated metallic red shimmer / kilapan pada nama hero */
+@keyframes red-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.text-red-shimmer {
+  background: linear-gradient(115deg,
+      #ffffff 20%,
+      #ffffff 38%,
+      #e11d2e 48%,
+      #ff5c6d 52%,
+      #e11d2e 56%,
+      #ffffff 66%,
+      #ffffff 100%);
+  background-size: 260% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: red-shimmer 3.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
 /* Seamless infinite marquee */
 @keyframes marquee {
   0% {
     transform: translateX(0%);
   }
+
   100% {
     transform: translateX(-50%);
   }
@@ -111,7 +139,8 @@
     scroll-behavior: auto !important;
   }
 
-  .animate-marquee {
+  .animate-marquee,
+  .text-red-shimmer {
     animation: none !important;
     transform: none !important;
   }

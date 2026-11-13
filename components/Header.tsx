@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 import { content } from "@/data/content";
 
 export function Header() {
@@ -14,7 +15,7 @@ export function Header() {
       setScrolled(window.scrollY > 20);
 
       // Section scroll spy
-      const sections = ["home", "about", "project", "credentials", "contact"];
+      const sections = ["home", "about", "project", "credentials", "experience", "contact"];
       const scrollPosition = window.scrollY + 200;
 
       for (const sectionId of sections) {
@@ -45,11 +46,9 @@ export function Header() {
 
   return (
     <>
-      {/* Fixed Transparent Header */}
+      {/* Fixed Header with backdrop blur everywhere (prevents mobile collision) */}
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
-            ? "bg-[#050505]/85 backdrop-blur-md border-b border-white/[0.08] py-4"
-            : "bg-transparent py-6 lg:py-7 border-b border-white/[0.04]"
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-[#050505]/85 backdrop-blur-md border-b border-white/[0.08] ${scrolled ? "py-3.5 sm:py-4 shadow-[0_10px_30px_rgba(0,0,0,0.8)]" : "py-4 sm:py-5"
           }`}
       >
         <div className="max-w-[1500px] mx-auto px-6 sm:px-10 flex items-center justify-between">
@@ -61,31 +60,36 @@ export function Header() {
           >
             <span className="font-display font-black text-[22px] sm:text-[24px] uppercase tracking-[-0.03em] text-white flex items-center">
               <span>M</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-accent-red inline-block mx-1" />
+              <span className="w-1.5 h-1.5 rounded-full bg-accent-red inline-block mx-1 shadow-[0_0_8px_#E11D2E]" />
               <span>FIR</span>
               <span className="text-accent-red font-black">DAN</span>
             </span>
           </Link>
 
-          {/* Center-Right Nav Menu (Desktop) */}
+          {/* Center-Right Nav Menu with Sliding Active Indicator (Desktop) */}
           <nav
             aria-label="Navigasi Utama"
-            className="hidden md:flex items-center gap-9 lg:gap-11"
+            className="hidden md:flex items-center gap-8 lg:gap-11"
           >
             {navItems.map((item) => {
               const isActive = activeSection === item.id;
               return (
-                <Link
-                  key={item.id}
-                  href={item.href}
-                  className={`font-mono text-[11px] lg:text-[12px] font-bold tracking-[0.2em] transition-colors py-1 relative ${isActive ? "text-white" : "text-white/60 hover:text-white"
-                    }`}
-                >
-                  {item.label}
+                <div key={item.id} className="relative py-1">
+                  <Link
+                    href={item.href}
+                    className={`font-mono text-[11px] lg:text-[12px] font-bold tracking-[0.2em] transition-colors duration-200 block ${isActive ? "text-white" : "text-white/60 hover:text-white"
+                      }`}
+                  >
+                    {item.label}
+                  </Link>
                   {isActive && (
-                    <span className="absolute left-0 right-0 -bottom-1 h-[2px] bg-accent-red shadow-[0_0_8px_#E11D2E]" />
+                    <motion.div
+                      layoutId="activeNavIndicator"
+                      className="absolute -bottom-1 inset-x-0 h-[2px] bg-accent-red shadow-[0_0_10px_#E11D2E]"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
                   )}
-                </Link>
+                </div>
               );
             })}
           </nav>
@@ -94,7 +98,7 @@ export function Header() {
           <div className="hidden sm:flex items-center gap-4">
             <Link
               href="/#contact"
-              className="bg-white text-black font-mono font-bold text-[11px] tracking-[0.16em] uppercase px-5 py-2.5 rounded-[4px] hover:bg-accent-red hover:text-white transition-all duration-200 shadow-sm active:scale-95"
+              className="bg-white text-black font-mono font-bold text-[11px] tracking-[0.16em] uppercase px-5 py-2.5 rounded-[4px] hover:bg-accent-red hover:text-white transition-all duration-300 shadow-sm active:scale-95"
             >
               CONTACT ME
             </Link>
@@ -103,11 +107,11 @@ export function Header() {
           {/* Hamburger Menu Toggle (Mobile) */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden text-white/80 hover:text-white p-2 focus:outline-none"
+            className="md:hidden text-white/90 hover:text-white p-2 rounded-lg bg-white/[0.05] border border-white/10 focus:outline-none"
             aria-label={mobileMenuOpen ? "Tutup Menu" : "Buka Menu"}
           >
             <svg
-              className="w-6 h-6"
+              className="w-5 h-5 transition-transform duration-200"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -116,14 +120,14 @@ export function Header() {
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  strokeWidth={2}
+                  strokeWidth={2.2}
                   d="M6 18L18 6M6 6l12 12"
                 />
               ) : (
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  strokeWidth={2}
+                  strokeWidth={2.2}
                   d="M4 6h16M4 12h16M4 18h16"
                 />
               )}
@@ -131,47 +135,59 @@ export function Header() {
           </button>
         </div>
 
-        {/* Mobile Navigation Drawer */}
-        {mobileMenuOpen && (
-          <div className="md:hidden bg-[#050505]/98 border-b border-white/[0.08] px-6 py-6 flex flex-col gap-5 animate-fadeIn">
-            {navItems.map((item) => (
-              <Link
-                key={item.id}
-                href={item.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className={`font-mono text-[12px] font-bold tracking-[0.2em] py-1 ${activeSection === item.id ? "text-accent-red" : "text-white/70"
-                  }`}
-              >
-                {item.label}
-              </Link>
-            ))}
-            <Link
-              href="/#contact"
-              onClick={() => setMobileMenuOpen(false)}
-              className="bg-white text-black font-mono font-bold text-[11px] tracking-[0.16em] uppercase px-4 py-3 rounded-[4px] text-center hover:bg-accent-red hover:text-white transition-colors mt-2"
+        {/* Mobile Navigation Drawer with Smooth Slide/Fade Animation */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+              className="md:hidden overflow-hidden bg-[#070707]/98 backdrop-blur-2xl border-b border-white/[0.1] px-6 py-6 flex flex-col gap-4 shadow-[0_20px_40px_rgba(0,0,0,0.9)]"
             >
-              CONTACT ME
-            </Link>
-          </div>
-        )}
+              {navItems.map((item) => (
+                <Link
+                  key={item.id}
+                  href={item.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`font-mono text-[12px] font-bold tracking-[0.2em] py-2 flex items-center justify-between border-b border-white/[0.05] transition-colors ${activeSection === item.id ? "text-accent-red" : "text-white/70 hover:text-white"
+                    }`}
+                >
+                  <span>{item.label}</span>
+                  {activeSection === item.id && (
+                    <span className="w-1.5 h-1.5 rounded-full bg-accent-red shadow-[0_0_8px_#E11D2E]" />
+                  )}
+                </Link>
+              ))}
+              <Link
+                href="/#contact"
+                onClick={() => setMobileMenuOpen(false)}
+                className="bg-white text-black font-mono font-bold text-[11px] tracking-[0.16em] uppercase px-4 py-3 rounded-[4px] text-center hover:bg-accent-red hover:text-white transition-colors mt-2"
+              >
+                CONTACT ME
+              </Link>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
 
-      {/* Floating Vertical Social Dock (Desktop Only - Far Left Screen Edge) */}
+      {/* Floating Vertical Social Dock (Desktop Only - High Contrast & Glowing on Black) */}
       <aside
-        className="fixed left-6 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col gap-6 items-center select-none"
+        className="fixed left-6 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col gap-5 items-center select-none"
         aria-label="Tautan Media Sosial"
       >
-        <div className="w-[1px] h-10 bg-white/10" aria-hidden="true" />
+        <div className="w-[1px] h-10 bg-white/20" aria-hidden="true" />
 
         {/* Instagram */}
         <a
-          href="https://instagram.com/firdanazhari"
+          href="https://instagram.com/firdan.az"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-white/40 hover:text-accent-red hover:-translate-y-1 hover:opacity-100 transition-all duration-200"
+          className="text-white hover:text-accent-red p-2.5 rounded-full bg-white/[0.08] border border-white/10 hover:border-accent-red/60 hover:bg-accent-red/10 transition-all duration-300 shadow-[0_4px_12px_rgba(0,0,0,0.5)] hover:shadow-[0_0_15px_rgba(225,29,46,0.5)] hover:-translate-y-1 flex items-center justify-center group"
           aria-label="Instagram Muhammad Firdan Azhari"
+          title="Instagram"
         >
-          <svg className="w-4 h-4 fill-currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4 fill-current transition-colors" viewBox="0 0 24 24">
             <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
           </svg>
         </a>
@@ -181,10 +197,11 @@ export function Header() {
           href={contact.linkedin.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-white/40 hover:text-accent-red hover:-translate-y-1 hover:opacity-100 transition-all duration-200"
+          className="text-white hover:text-accent-red p-2.5 rounded-full bg-white/[0.08] border border-white/10 hover:border-accent-red/60 hover:bg-accent-red/10 transition-all duration-300 shadow-[0_4px_12px_rgba(0,0,0,0.5)] hover:shadow-[0_0_15px_rgba(225,29,46,0.5)] hover:-translate-y-1 flex items-center justify-center group"
           aria-label="LinkedIn Muhammad Firdan Azhari"
+          title="LinkedIn"
         >
-          <svg className="w-4 h-4 fill-currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4 fill-current transition-colors" viewBox="0 0 24 24">
             <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
           </svg>
         </a>
@@ -194,15 +211,16 @@ export function Header() {
           href={contact.github.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-white/40 hover:text-accent-red hover:-translate-y-1 hover:opacity-100 transition-all duration-200"
+          className="text-white hover:text-accent-red p-2.5 rounded-full bg-white/[0.08] border border-white/10 hover:border-accent-red/60 hover:bg-accent-red/10 transition-all duration-300 shadow-[0_4px_12px_rgba(0,0,0,0.5)] hover:shadow-[0_0_15px_rgba(225,29,46,0.5)] hover:-translate-y-1 flex items-center justify-center group"
           aria-label="GitHub Muhammad Firdan Azhari"
+          title="GitHub"
         >
-          <svg className="w-4 h-4 fill-currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4 fill-current transition-colors" viewBox="0 0 24 24">
             <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
           </svg>
         </a>
 
-        <div className="w-[1px] h-10 bg-white/10" aria-hidden="true" />
+        <div className="w-[1px] h-10 bg-white/20" aria-hidden="true" />
       </aside>
     </>
   );

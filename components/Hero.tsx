@@ -96,7 +96,7 @@ export function Hero() {
           <AnimatePresence mode="wait">
             <motion.div
               key={currentWord}
-              className="flex items-center justify-center font-display font-black tracking-[-0.04em] uppercase leading-none text-white text-center whitespace-nowrap text-[clamp(3.4rem,11.5vw,12.5rem)]"
+              className="flex items-center justify-center font-display font-black tracking-[-0.04em] uppercase leading-none text-center whitespace-nowrap text-[clamp(3.4rem,11.5vw,12.5rem)] text-red-shimmer select-none drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)]"
               aria-label={currentWord}
             >
               {characters.map((char, index) => {
@@ -117,7 +117,7 @@ export function Hero() {
                     className="inline-flex overflow-hidden h-[1.12em] items-center justify-center"
                   >
                     <motion.span
-                      className="inline-block will-change-transform"
+                      className="inline-block will-change-transform text-inherit"
                       initial={{ y: "105%", opacity: 0 }}
                       animate={{
                         y: "0%",

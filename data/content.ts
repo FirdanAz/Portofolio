@@ -1,3 +1,9 @@
+export interface ProjectImage {
+  url: string;
+  caption: string;
+  alt: string;
+}
+
 export interface Project {
   slug: string;
   number: string;
@@ -9,6 +15,8 @@ export interface Project {
   stackList: string[];
   result: string;
   featured?: boolean;
+  coverImage: string;
+  galleryImages: ProjectImage[];
   previewType: "village" | "notes" | "nusa" | "farm";
   links: {
     label: string;
@@ -139,35 +147,68 @@ export const content: PortfolioContent = {
       result: "Juara 3 Nasional GENETIC 2025",
       featured: true,
       previewType: "village",
+      coverImage: "/projects/satu-desa/home.png",
+      galleryImages: [
+        {
+          url: "/projects/satu-desa/home.png",
+          caption: "Beranda Utama & Akses Cepat Layanan Warga",
+          alt: "Tampilan beranda utama aplikasi mobile Satu Desa",
+        },
+        {
+          url: "/projects/satu-desa/layanan-surat.png",
+          caption: "Alur Formulir Pengajuan Dokumen Administrasi Kependudukan",
+          alt: "Formulir permohonan surat administrasi warga Satu Desa",
+        },
+        {
+          url: "/projects/satu-desa/dana-desa.png",
+          caption: "Transparansi Anggaran Pendapatan dan Belanja Desa (APBDes)",
+          alt: "Modul transparansi dan laporan alokasi dana desa",
+        },
+        {
+          url: "/projects/satu-desa/kabar-desa.png",
+          caption: "Feed Publikasi Berita dan Agenda Kegiatan Resmi Kelurahan",
+          alt: "Feed kabar dan pengumuman resmi warga desa",
+        },
+        {
+          url: "/projects/satu-desa/detail-kabar-desa.png",
+          caption: "Tampilan Detail Berita dengan Dokumentasi Kegiatan Warga",
+          alt: "Detail kabar desa Satu Desa",
+        },
+        {
+          url: "/projects/satu-desa/bayar-sampah.png",
+          caption: "Modul Pembayaran Retribusi Iuran Sampah & Layanan Publik",
+          alt: "Antarmuka pembayaran retribusi kebersihan desa",
+        },
+      ],
       links: [
         { label: "Lihat studi kasus", href: "/projects/satu-desa" },
         {
-          label: "GitHub [ISI]",
-          href: "https://github.com/firdanazhari/satu-desa",
+          label: "GitHub Repositori",
+          href: "https://github.com/FirdanAz/Satu-Desa-Genetic-2025",
           isExternal: true,
         },
       ],
       details: {
         overview:
-          "Satu Desa adalah platform digital terintegrasi untuk menjembatani birokrasi pemerintahan desa dan kebutuhan warga sehari-hari melalui antarmuka mobile yang intuitif.",
+          "Satu Desa adalah platform digital terintegrasi untuk memodernisasi tata kelola birokrasi pemerintahan desa dan mempercepat pelayanan administrasi warga melalui antarmuka mobile yang mudah dipahami.",
         problemStatement:
-          "Warga desa kerap menghadapi hambatan jarak geografis, proses pengajuan berkas manual yang memakan waktu berhari-hari, serta minimnya transparansi informasi terkait alokasi dana dan program sosial desa.",
+          "Warga desa kerap terkendala oleh jarak fisik ke kantor kelurahan, antrean panjang untuk urusan surat menyurat, serta minimnya keterbukaan informasi perihal realisasi anggaran dan agenda bantuan desa.",
         roleDescription:
-          "Memegang peran penuh (Full-Stack Developer) mulai dari riset kebutuhan pengguna, prototyping UI di Figma, pengembangan klien mobile berbasis Flutter, perancangan skema relasional di MySQL, hingga penulisan endpoint REST API menggunakan Laravel.",
+          "Bertindak sebagai Full-Stack Developer: merancang alur interaksi dan desain antarmuka di Figma, membangun aplikasi klien berbasis Flutter, merancang skema relasional di MySQL, dan mengimplementasikan seluruh endpoint REST API di backend Laravel.",
         keyFeatures: [
-          "Pengajuan surat keterangan dan dokumen administrasi warga secara daring tanpa antre di kantor kelurahan.",
-          "Direktori potensi dan UMKM desa untuk memperluas jangkauan pemasaran komoditas lokal.",
-          "Kanal pengumuman resmi dan transparansi agenda desa langsung ke ponsel warga.",
-          "Peta persebaran fasilitas publik dan pos pelayanan desa berbasis geolokasi.",
+          "Pengajuan surat pengantar dan dokumen kependudukan secara digital tanpa harus datang ke balai desa.",
+          "Modul transparansi APBDes dan alokasi dana pembangunan desa secara transparan.",
+          "Sistem pembayaran retribusi dan iuran sampah berkala bagi warga.",
+          "Pusat informasi berita, agenda sosialisasi, dan pengumuman penting pemerintah desa.",
         ],
         technicalHighlights: [
-          "State management Flutter yang modular untuk pengalaman transisi antarmuka yang cepat di perangkat entry-level.",
-          "Arsitektur REST API Laravel dengan validasi ketat dan penanganan sesi terenkripsi.",
-          "Optimasi kueri MySQL pada data demografi untuk menjaga latensi respons di bawah 200 milidetik.",
+          "Pengelolaan state Flutter yang terstruktur untuk menjamin keandalan aplikasi pada berbagai spesifikasi ponsel Android.",
+          "Backend REST API Laravel dengan proteksi validasi request, token authentication, dan query optimal pada MySQL.",
+          "Penanganan offline caching untuk daftar riwayat pengajuan surat sehingga warga tetap dapat mengecek status dokumen saat jaringan lambat.",
         ],
         outcomes:
-          "Meraih penghargaan Juara 3 Tingkat Nasional pada ajang kompetisi GENETIC 2025 bidang Inovasi Teknologi Layanan Publik.",
-        githubUrl: "https://github.com/firdanazhari/satu-desa",
+          "Berhasil meraih penghargaan Juara 3 Tingkat Nasional pada ajang kompetisi GENETIC 2025 kategori Inovasi Teknologi Pelayanan Publik.",
+        githubUrl: "https://github.com/FirdanAz/Satu-Desa-Genetic-2025",
         demoUrl: "[ISI: Tautan video demo / APK uji coba belum dipublikasikan]",
       },
     },
@@ -177,41 +218,84 @@ export const content: PortfolioContent = {
       title: "Notula",
       category: "Productivity",
       problem:
-        "Mengubah rekaman suara dan percakapan rapat yang tercecer menjadi notulensi terstruktur, daftar tindak lanjut (action items), dan ekspor berkas resmi.",
+        "Mengubah rekaman suara dan percakapan rapat yang panjang menjadi notulensi terstruktur, pembagian action items, serta ekspor berkas .docx otomatis.",
       role: "Full-Stack Developer",
       stack: "FLUTTER  ·  LARAVEL  ·  REST API",
       stackList: ["Flutter", "Laravel", "REST API", "Chunked Upload", "Docx Generator"],
-      result: "Alur pencatatan dan distribusi hasil rapat terpusat dalam satu alur kerja.",
+      result: "Alur dokumentasi rapat terorganisir dengan mekanisme unggah audio tahan putus koneksi.",
       previewType: "notes",
+      coverImage: "/projects/notula/02-home.png",
+      galleryImages: [
+        {
+          url: "/projects/notula/02-home.png",
+          caption: "Dasbor Beranda Notula & Riwayat Rapat Aktif",
+          alt: "Tampilan beranda aplikasi Notula",
+        },
+        {
+          url: "/projects/notula/04-recording.png",
+          caption: "Antarmuka Perekaman Audio Rapat dengan Visual Gelombang Suara",
+          alt: "Layar perekaman suara audio Notula",
+        },
+        {
+          url: "/projects/notula/05-processing.png",
+          caption: "Proses Unggah Chunked & Resumable Audio ke Server",
+          alt: "Proses komputasi dan pengunggahan audio",
+        },
+        {
+          url: "/projects/notula/06-recap.png",
+          caption: "Rekapitulasi Poin Diskusi, Catatan Penting, dan Keputusan",
+          alt: "Ringkasan notulensi rapat Notula",
+        },
+        {
+          url: "/projects/notula/08-output.png",
+          caption: "Daftar Tindak Lanjut (Action Items) per Penanggung Jawab",
+          alt: "Daftar action items rapat",
+        },
+        {
+          url: "/projects/notula/09-templates.png",
+          caption: "Pilihan Format & Template Standar Dokumen Risalah Rapat",
+          alt: "Template dokumen notulen Notula",
+        },
+        {
+          url: "/projects/notula/10-editor.png",
+          caption: "Editor Teks Interaktif untuk Penyesuaian Risalah Sebelum Ekspor",
+          alt: "Editor catatan hasil rapat Notula",
+        },
+        {
+          url: "/projects/notula/11-detail.png",
+          caption: "Pratinjau Dokumen Siap Cetak dan Ekspor Format .docx",
+          alt: "Detail berkas risalah dan tombol ekspor .docx",
+        },
+      ],
       links: [
         { label: "Lihat studi kasus", href: "/projects/notula" },
         {
-          label: "GitHub [ISI]",
-          href: "https://github.com/firdanazhari/notula",
+          label: "GitHub Repositori",
+          href: "https://github.com/FirdanAz/notula_mobile-app",
           isExternal: true,
         },
       ],
       details: {
         overview:
-          "Notula adalah asisten rapat cerdas yang menangani siklus dokumentasi lengkap: dari perekaman audio di perangkat lapangan, pengunggahan data secara terpotong (chunked) yang tahan putus koneksi, sampai format notulen terstruktur yang siap dibagikan.",
+          "Notula adalah asisten rapat mobile yang menyelesaikan permasalahan utama pencatatan rapat: kegagalan unggah file audio besar, pencatatan manual yang memakan waktu, dan format laporan akhir yang berantakan.",
         problemStatement:
-          "Proses notulensi konvensional rawan kehilangan poin penting, berkas rekaman suara berukuran besar kerap gagal diunggah ketika sinyal seluler tidak stabil, dan pembuatan berkas laporan akhir (.docx) memakan waktu lama.",
+          "File audio durasi panjang sering gagal diunggah karena batas timeout server atau sinyal seluler yang fluktuatif di ruang rapat, sementara penulisan dokumen resmi pasca-rapat kerap tertunda berhari-hari.",
         roleDescription:
-          "Merancang alur pengguna, mengimplementasikan modul perekaman audio di aplikasi Flutter, serta membangun backend Laravel dengan protokol chunked & resumable upload serta generator dokumen Word.",
+          "Mengembangkan aplikasi Flutter dari perekam audio hingga antarmuka editor, serta membangun backend Laravel dengan protokol chunked & resumable upload serta integrasi generator file .docx.",
         keyFeatures: [
-          "Perekam audio langsung di dalam aplikasi dengan kontrol jeda dan penandaan stempel waktu otomatis.",
-          "Pengunggahan audio ke server Laravel secara chunked (berkeping) dengan fitur resume otomatis saat jaringan terputus.",
-          "Pengelompokan agenda pembahasan, kesimpulan rapat, dan pembagian tugas per peserta rapat.",
-          "Ekspor otomatis dokumen hasil rapat ke format file .docx sesuai format standar persuratan organisasi.",
+          "Modul perekaman audio built-in dengan jeda dan stempel waktu transkrip.",
+          "Sistem pengunggahan chunked & resumable yang dapat melanjutkan unggahan otomatis saat koneksi internet pulih.",
+          "Strukturisasi cerdas notulensi menjadi pembagian: Agenda, Keputusan Utama, dan Tindak Lanjut (Action Items).",
+          "Ekspor dokumen notulen instan ke berkas berekstensi .docx yang siap diarsipkan atau dicetak.",
         ],
         technicalHighlights: [
-          "Mekanisme chunked file upload dengan verifikasi checksum per keping data untuk mencegah integritas file korup.",
-          "Pemrosesan background task di Laravel Queue untuk pembentukan berkas dokumen tanpa memblokir antarmuka pengguna.",
-          "Penyimpanan lokal di Flutter (offline-first draft) sehingga pengguna tidak kehilangan catatan meski perangkat kehabisan daya.",
+          "Protokol chunked upload di Laravel dengan kalkulasi checksum hash SHA-256 untuk memastikan keutuhan berkas audio.",
+          "Antarmuka Flutter berbasis clean architecture dan reactive state untuk kontrol audio yang mulus.",
+          "Pembangkitan berkas dokumen Word (.docx) berbasis template XML kustom di sisi server.",
         ],
         outcomes:
-          "Memangkas durasi penyusunan dokumen risalah rapat pasca-acara dan meniadakan kendala kegagalan unggah file rekaman besar pada jaringan seluler lemah.",
-        githubUrl: "https://github.com/firdanazhari/notula",
+          "Menjamin reliabilitas pengunggahan file audio hingga ratusan megabyte tanpa risiko korup berkas dan memangkas waktu penyusunan risalah rapat hingga 60%.",
+        githubUrl: "https://github.com/FirdanAz/notula_mobile-app",
         demoUrl: "[ISI: Tautan demo Notula belum dipublikasikan]",
       },
     },
@@ -227,35 +311,58 @@ export const content: PortfolioContent = {
       stackList: ["Next.js", "TypeScript", "Tailwind CSS", "Figma", "SDG 11 Alignment"],
       result: "Eksplorasi warisan budaya interaktif dengan navigasi visual yang aksesibel.",
       previewType: "nusa",
+      coverImage: "/projects/nusaverse/hero-overview.png",
+      galleryImages: [
+        {
+          url: "/projects/nusaverse/hero-overview.png",
+          caption: "Halaman Utama Eksplorasi Digital Kebudayaan Nusantara",
+          alt: "Tampilan beranda visual NUSAVERSE",
+        },
+        {
+          url: "/projects/nusaverse/explore-provinsi.png",
+          caption: "Katalog & Eksplorasi Keragaman Budaya 34 Provinsi Indonesia",
+          alt: "Direktori 34 provinsi pada NUSAVERSE",
+        },
+        {
+          url: "/projects/nusaverse/budaya-detail.png",
+          caption: "Halaman Narasi Warisan Budaya, Busana Tradisional, dan Filosofi Adat",
+          alt: "Detail dokumentasi warisan budaya NUSAVERSE",
+        },
+        {
+          url: "/projects/nusaverse/interaktif-map.png",
+          caption: "Peta Persebaran Budaya Interaktif yang Mendukung Agenda SDG 11",
+          alt: "Peta persebaran kebudayaan Indonesia interaktif",
+        },
+      ],
       links: [
         { label: "Lihat studi kasus", href: "/projects/nusaverse" },
         {
-          label: "GitHub [ISI]",
-          href: "https://github.com/firdanazhari/nusaverse",
+          label: "GitHub Repositori",
+          href: "https://github.com/FirdanAz/nusaverse-bytesfest2026",
           isExternal: true,
         },
       ],
       details: {
         overview:
-          "NUSAVERSE dibangun untuk ajang BytesFest 2026 guna mendukung Target Pembangunan Berkelanjutan (SDG 11: Kota dan Komunitas yang Berkelanjutan) melalui pelestarian warisan budaya Nusantara secara digital.",
+          "NUSAVERSE dibangun untuk kompetisi nasional BytesFest 2026 sebagai sarana edukasi kebudayaan interaktif berbasis web yang sejalan dengan Tujuan Pembangunan Berkelanjutan (SDG 11: Kota dan Komunitas yang Berkelanjutan).",
         problemStatement:
-          "Dokumentasi budaya tradisional Indonesia sering tersebar secara sporadis dan disajikan secara pasif berbasis teks, sehingga kurang mengundang minat eksplorasi generasi muda.",
+          "Dokumentasi tradisi Nusantara sering kali disajikan secara pasif berbasis teks tebal tanpa navigasi visual yang mengundang generasi muda untuk menjelajahi keunikan setiap daerah.",
         roleDescription:
-          "Bertanggung jawab atas arsitektur frontend web, menerjemahkan wireframe dan desain Figma menjadi komponen Next.js berbasis TypeScript, serta memastikan visualisasi orbit budaya berjalan mulus pada berbagai resolusi layar.",
+          "Bertanggung jawab atas arsitektur frontend web: menerjemahkan rancangan sistem desain dari Figma ke komponen React/Next.js, menyusun tata letak responsif bertema Nusantara, serta mengoptimasi performa pemuatan gambar.",
         keyFeatures: [
-          "Eksplorasi terarah materi adat, pakaian tradisional, tarian, dan rumah adat 34 provinsi.",
-          "Navigasi interaktif berbasis kartu dan tata letak dinamis bertema kepulauan Nusantara.",
-          "Aksesibilitas web dengan kontras warna terbaca, dukungan pembaca layar, dan navigasi ramah keyboard.",
-          "Arsitektur halaman terindeks SEO untuk mendukung literasi budaya di mesin pencari.",
+          "Navigasi interaktif kebudayaan 34 provinsi Nusantara.",
+          "Koleksi informasi pakaian adat, rumah tradisional, senjata pusaka, dan tarian daerah.",
+          "Desain antarmuka bertema budaya dengan tipografi terbaca dan struktur aksesibilitas tinggi.",
+          "Dukungan keyboard navigation dan kontras warna yang ramah bagi seluruh pengguna.",
         ],
         technicalHighlights: [
-          "Penerapan Next.js App Router dengan Static Site Generation (SSG) untuk pemuatan halaman instan.",
-          "Desain sistem modular dengan Tailwind CSS tanpa ketergantungan pustaka animasi berlebih demi menjaga beban bundle minimal.",
-          "Optimasi gambar menggunakan next/image dengan format modern WebP/AVIF untuk efisiensi transfer data.",
+          "Penerapan Next.js App Router dengan Static Site Generation (SSG) untuk rendering halaman super cepat.",
+          "Komponen reusable berbasis TypeScript dan Tailwind CSS tanpa dependensi library eksternal yang membebani browser.",
+          "Optimalisasi aset grafis menggunakan next/image dengan format modern WebP/AVIF.",
         ],
         outcomes:
-          "Diselesaikan sebagai karya inovasi digital BytesFest 2026 dengan performa Core Web Vitals sempurna dan navigasi bebas hambatan.",
-        githubUrl: "https://github.com/firdanazhari/nusaverse",
+          "Diselesaikan sebagai karya inovasi kompetisi BytesFest 2026 dengan performa Core Web Vitals tinggi dan tata letak yang konsisten di perangkat seluler maupun desktop.",
+        githubUrl: "https://github.com/FirdanAz/nusaverse-bytesfest2026",
         demoUrl: "[ISI: Tautan demo web NUSAVERSE belum dipublikasikan]",
       },
     },
@@ -271,35 +378,63 @@ export const content: PortfolioContent = {
       stackList: ["Next.js 14", "TypeScript", "Tailwind CSS", "Laravel", "REST API", "AI Model API"],
       result: "Pencatatan lahan, kalkulasi panen, dan metrik produktivitas terpusat dalam satu dasbor.",
       previewType: "farm",
+      coverImage: "/projects/ladangnusa/dashboard-main.png",
+      galleryImages: [
+        {
+          url: "/projects/ladangnusa/dashboard-main.png",
+          caption: "Dasbor Utama Manajemen Operasional Pertanian & Status Lahan",
+          alt: "Dasbor web monitoring pertanian LadangNusa",
+        },
+        {
+          url: "/projects/ladangnusa/lahan-monitoring.png",
+          caption: "Detail Pemantauan Petak Lahan, Varietas Tanaman, dan Luas Area",
+          alt: "Tabel dan kartu monitoring lahan LadangNusa",
+        },
+        {
+          url: "/projects/ladangnusa/analisis-ai.png",
+          caption: "Panel Analisis & Rekomendasi Cerdas Tindakan Agronomi Berbasis AI",
+          alt: "Modul insight dan rekomendasi cerdas LadangNusa",
+        },
+        {
+          url: "/projects/ladangnusa/proyeksi-panen.png",
+          caption: "Grafik Proyeksi Panen dan Estimasi Hasil Produktivitas Komoditas",
+          alt: "Grafik proyeksi dan kalkulasi panen",
+        },
+        {
+          url: "/projects/ladangnusa/jadwal-irigasi.png",
+          caption: "Kalender Perawatan Tanaman: Jadwal Pemupukan dan Irigasi Lapangan",
+          alt: "Kalender dan jadwal kerja tani LadangNusa",
+        },
+      ],
       links: [
         { label: "Lihat studi kasus", href: "/projects/ladangnusa" },
         {
-          label: "GitHub [ISI]",
-          href: "https://github.com/firdanazhari/ladangnusa",
+          label: "GitHub Repositori",
+          href: "https://github.com/FirdanAz/ladangnusa-web",
           isExternal: true,
         },
       ],
       details: {
         overview:
-          "LadangNusa adalah sistem manajemen pertanian terpadu yang memadukan pencatatan lapangan secara real-time dengan modul kecerdasan buatan untuk kalkulasi estimasi panen dan pengelolaan sumber daya.",
+          "LadangNusa adalah sistem manajemen pertanian terpadu berbasis Next.js 14 yang menghubungkan pemantauan kondisi lahan secara real-time dengan modul kecerdasan buatan untuk proyeksi hasil panen.",
         problemStatement:
-          "Pencatatan bibit, pupuk, dan jadwal tanam yang masih dilakukan secara manual pada buku fisik mempersulit estimasi waktu panen dan analisis biaya operasional per petak lahan.",
+          "Pencatatan bibit, pupuk, dan jadwal tanam yang masih dilakukan secara konvensional pada buku catatan manual menyulitkan petani dalam menghitung biaya produksi serta memproyeksikan waktu panen optimal.",
         roleDescription:
-          "Mengembangkan platform web responsif menggunakan Next.js 14 (App Router) dan TypeScript, merancang komponen dasbor dengan Tailwind CSS, serta mengintegrasikan API backend untuk pemrosesan estimasi produktivitas.",
+          "Membangun arsitektur frontend web menggunakan Next.js 14 (App Router) dan TypeScript, merancang komponen dasbor dengan Tailwind CSS, serta mengintegrasikan REST API backend untuk pemrosesan data kalkulasi pertanian.",
         keyFeatures: [
-          "Dasbor pemantauan multi-lahan dengan metrik luas area dan status siklus tanam aktif.",
-          "Kalkulator estimasi proyeksi panen berbasis riwayat luas lahan dan varietas bibit.",
-          "Grafik tren produktivitas mingguan yang ringan dan responsif pada peramban seluler.",
-          "Buku catatan digital pemupukan, irigasi, dan pengeluaran modal per musim tanam.",
+          "Dasbor pemantauan multi-petak lahan dengan metrik luas area dan varietas tanaman.",
+          "Kalkulator proyeksi estimasi hasil panen berdasarkan input parameter luasan dan komoditas.",
+          "Visualisasi grafik produktivitas mingguan yang responsif diakses dari ponsel petani.",
+          "Buku catatan digital pemupukan, pengairan, dan pencatatan pengeluaran modal tani.",
         ],
         technicalHighlights: [
-          "Komponen grafik performa tinggi berbasis SVG murni tanpa library chart eksternal yang membebani memori.",
-          "Validasi skema form menggunakan TypeScript untuk mencegah anomali data luasan dan kuantitas pupuk.",
-          "Integrasi REST API terpisah dengan caching cerdas pada data historis musim tanam.",
+          "Komponen grafik visualisasi data yang ringan dan adaptif terhadap layar smartphone.",
+          "Validasi formulir berbasis TypeScript untuk meminimalisir kesalahan entri kuantitas pupuk dan benih.",
+          "Struktur caching API yang efisien untuk mempercepat navigasi riwayat musim tanam.",
         ],
         outcomes:
-          "Mempermudah evaluasi operasional lahan tani dengan visualisasi metrik yang langsung dapat dipahami tanpa latar belakang teknis.",
-        githubUrl: "https://github.com/firdanazhari/ladangnusa",
+          "Memudahkan evaluasi operasional lahan tani dengan penyajian data yang intuitif tanpa membutuhkan keahlian teknis yang rumit.",
+        githubUrl: "https://github.com/FirdanAz/ladangnusa-web",
         demoUrl: "[ISI: Tautan demo LadangNusa belum dipublikasikan]",
       },
     },
@@ -345,8 +480,8 @@ export const content: PortfolioContent = {
     email: "muhammadfirdanazhari@gmail.com",
     github: {
       label: "GitHub",
-      url: "https://github.com/firdanazhari",
-      display: "github.com/firdanazhari [ISI]",
+      url: "https://github.com/FirdanAz",
+      display: "github.com/FirdanAz",
     },
     linkedin: {
       label: "LinkedIn",
@@ -356,4 +491,3 @@ export const content: PortfolioContent = {
     location: "Kudus, Jawa Tengah, Indonesia",
   },
 };
-

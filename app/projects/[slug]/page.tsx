@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { content, Project } from "@/data/content";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { ProjectPreview } from "@/components/ProjectPreview";
 
 interface ProjectPageProps {
   params: Promise<{
@@ -31,12 +31,20 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${project.title} — Studi Kasus`,
+    title: `${project.title} — Studi Kasus Rekayasa Perangkat Lunak`,
     description: `${project.details.overview} Peran: ${project.role}. Stack: ${project.stack}.`,
     openGraph: {
       title: `${project.title} | Muhammad Firdan Azhari`,
       description: project.details.overview,
       url: `https://firdanazhari.vercel.app/projects/${project.slug}`,
+      images: [
+        {
+          url: project.coverImage,
+          width: 1200,
+          height: 630,
+          alt: `Tangkapan layar antarmuka proyek ${project.title}`,
+        },
+      ],
     },
   };
 }
@@ -135,19 +143,28 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
           </div>
         </header>
 
-        {/* Visual Showcase */}
+        {/* Hero Visual Showcase */}
         <section
           className="py-12 lg:py-16 border-b border-ink"
           aria-labelledby="preview-heading"
         >
           <h2 id="preview-heading" className="sr-only">
-            Visual Antarmuka Proyek
+            Visual Antarmuka Utama Proyek
           </h2>
-          <div className="max-w-[960px] mx-auto shadow-sm">
-            <ProjectPreview type={project.previewType} />
+          <div className="max-w-[1100px] mx-auto border border-ink bg-paper-card p-4 sm:p-8">
+            <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] border border-ink overflow-hidden bg-paper-pure shadow-sm">
+              <Image
+                src={project.coverImage}
+                alt={`Tangkapan layar antarmuka utama ${project.title}`}
+                fill
+                priority
+                className="object-cover object-top"
+                sizes="(max-width: 1200px) 100vw, 1100px"
+              />
+            </div>
           </div>
           <p className="font-mono text-[9px] uppercase tracking-wider text-ink-muted text-center mt-4">
-            FIG. {project.number} — REPRESENTASI ARSITEKTUR &amp; ANTARMUKA {project.title}
+            FIG. {project.number} — TAMPILAN UTAMA ANTARMUKA {project.title.toUpperCase()}
           </p>
         </section>
 
@@ -265,6 +282,52 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                 </p>
               </div>
             </section>
+
+            {/* 06: Full Screenshot Gallery */}
+            {project.galleryImages.length > 0 && (
+              <section aria-labelledby="gallery-heading">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="font-mono text-[10px] text-teal font-semibold">
+                    06
+                  </span>
+                  <h2
+                    id="gallery-heading"
+                    className="font-display font-semibold text-[26px] sm:text-[32px] text-ink"
+                  >
+                    Galeri Antarmuka &amp; Alur Fitur
+                  </h2>
+                </div>
+                <p className="text-[13px] text-ink-muted mb-6">
+                  Dokumentasi visual tangkapan layar antarmuka dari aplikasi riil
+                  yang dikembangkan:
+                </p>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {project.galleryImages.map((img, idx) => (
+                    <figure
+                      key={img.url + idx}
+                      className="border border-ink bg-paper-pure p-3 flex flex-col justify-between"
+                    >
+                      <div className="relative w-full aspect-[16/10] border border-line overflow-hidden bg-paper-muted">
+                        <Image
+                          src={img.url}
+                          alt={img.alt}
+                          fill
+                          className="object-cover object-top hover:scale-[1.02] transition-transform duration-300"
+                          sizes="(max-width: 768px) 100vw, 500px"
+                        />
+                      </div>
+                      <figcaption className="pt-3 font-mono text-[8px] uppercase tracking-wider text-ink-subtle">
+                        <b className="text-teal font-bold mr-1.5">
+                          #{idx + 1}
+                        </b>
+                        <span>{img.caption}</span>
+                      </figcaption>
+                    </figure>
+                  ))}
+                </div>
+              </section>
+            )}
           </div>
 
           {/* Sticky Sidebar for Stack & External Links */}
@@ -292,7 +355,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                 Tautan &amp; Repositori
               </h3>
               <div className="flex flex-col gap-4">
-                <div className="p-4 border border-line bg-paper-pure flex flex-col gap-1.5">
+                <div className="p-4 border border-ink bg-paper-pure flex flex-col gap-1.5">
                   <span className="font-mono text-[8px] uppercase tracking-wider text-ink-muted">
                     Kode Sumber
                   </span>
@@ -302,13 +365,13 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                     rel="noopener noreferrer"
                     className="font-mono text-[11px] font-bold text-ink hover:text-teal-dark inline-flex items-center justify-between"
                   >
-                    <span>GitHub Repositori</span>
+                    <span>Kunjungi Repositori GitHub</span>
                     <span aria-hidden="true" className="text-teal font-sans">
                       ↗
                     </span>
                   </a>
-                  <span className="font-mono text-[8px] text-teal-dark mt-1">
-                    [Tautan Placeholder Terkonfirmasi]
+                  <span className="font-mono text-[8px] text-teal-dark mt-1 break-all">
+                    {project.details.githubUrl}
                   </span>
                 </div>
 
@@ -398,4 +461,3 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
     </div>
   );
 }
-

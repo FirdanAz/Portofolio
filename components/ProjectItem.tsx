@@ -1,6 +1,6 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Project } from "@/data/content";
-import { ProjectPreview } from "./ProjectPreview";
 
 interface ProjectItemProps {
   project: Project;
@@ -89,7 +89,7 @@ export function ProjectItem({ project, isFeatured = false }: ProjectItemProps) {
           </div>
         </div>
 
-        {/* Featured Visual Column */}
+        {/* Featured Visual Column with Real Image Screenshot */}
         <div className="pt-8 pb-6 lg:py-10 lg:pl-10 relative flex flex-col justify-between border-t lg:border-t-0 border-ink">
           {/* Award Badge */}
           <div
@@ -107,12 +107,21 @@ export function ProjectItem({ project, isFeatured = false }: ProjectItemProps) {
             </div>
           </div>
 
-          <div>
-            <ProjectPreview type={project.previewType} />
+          <div className="relative border border-ink bg-[#E8EFE8] p-4 sm:p-6 overflow-hidden group">
+            <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] lg:aspect-[16/10] overflow-hidden border border-ink/40 bg-paper-pure">
+              <Image
+                src={project.coverImage}
+                alt={`Tangkapan layar antarmuka ${project.title}`}
+                fill
+                priority={true}
+                className="object-cover object-top group-hover:scale-[1.015] transition-transform duration-300"
+                sizes="(max-width: 1024px) 100vw, 60vw"
+              />
+            </div>
           </div>
 
           <p className="font-mono text-[8px] text-ink-muted uppercase tracking-wider mt-4">
-            FIG. 01 — ANTARMUKA UTAMA SATU DESA (MOBILE)
+            FIG. 01 — TAMPILAN ANTARMUKA APLIKASI SATU DESA (MOBILE)
           </p>
         </div>
       </article>
@@ -132,7 +141,7 @@ export function ProjectItem({ project, isFeatured = false }: ProjectItemProps) {
           </p>
         </div>
 
-        <h3 className="font-display font-semibold text-[32px] sm:text-[36px] leading-[1] tracking-tight text-ink mt-5 mb-3">
+        <h3 className="font-display font-semibold text-[30px] sm:text-[34px] leading-[1] tracking-tight text-ink mt-5 mb-3">
           <Link
             href={`/projects/${project.slug}`}
             className="hover:text-teal-dark transition-colors"
@@ -195,7 +204,17 @@ export function ProjectItem({ project, isFeatured = false }: ProjectItemProps) {
       </div>
 
       <div className="mt-4 pt-2">
-        <ProjectPreview type={project.previewType} />
+        <div className="relative border border-ink bg-paper-card p-3 overflow-hidden group">
+          <div className="relative w-full aspect-[16/10] overflow-hidden border border-line bg-paper-pure">
+            <Image
+              src={project.coverImage}
+              alt={`Tangkapan layar antarmuka ${project.title}`}
+              fill
+              className="object-cover object-top group-hover:scale-[1.02] transition-transform duration-300"
+              sizes="(max-width: 768px) 100vw, 33vw"
+            />
+          </div>
+        </div>
         <p className="font-mono text-[8px] text-ink-muted uppercase tracking-wider mt-3">
           FIG. {project.number} — {project.title} VIEW
         </p>
@@ -203,4 +222,3 @@ export function ProjectItem({ project, isFeatured = false }: ProjectItemProps) {
     </article>
   );
 }
-

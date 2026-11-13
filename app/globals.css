@@ -76,18 +76,36 @@
       rgba(5, 5, 5, 0) 70%);
 }
 
-/* Animated metallic red shimmer sweep across hero name */
-@keyframes beam-sweep {
+/* Animated metallic red shimmer / kilapan pada nama hero (ONLY on text letters, NO box) */
+@keyframes text-red-shine {
   0% {
-    transform: translateX(-120%);
+    background-position: 200% 0;
   }
   100% {
-    transform: translateX(120%);
+    background-position: -200% 0;
   }
 }
 
-.animate-beam-sweep {
-  animation: beam-sweep 3.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+.text-red-glow-shine {
+  background: linear-gradient(
+    115deg,
+    #ffffff 0%,
+    #ffffff 32%,
+    #e11d2e 44%,
+    #ff3b4b 49%,
+    #ffffff 52%,
+    #ff3b4b 55%,
+    #e11d2e 60%,
+    #ffffff 72%,
+    #ffffff 100%
+  );
+  background-size: 280% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #ffffff;
+  display: inline-block;
+  animation: text-red-shine 3.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 /* Seamless infinite marquee */
@@ -126,7 +144,7 @@
   }
 
   .animate-marquee,
-  .animate-beam-sweep {
+  .text-red-glow-shine {
     animation: none !important;
     transform: none !important;
   }

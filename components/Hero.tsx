@@ -22,7 +22,6 @@ export function Hero() {
   }, [words.length]);
 
   const currentWord = words[wordIndex];
-  const characters = currentWord.split("");
 
   // Mouse parallax state (desktop only, disabled on reduced motion)
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -98,65 +97,16 @@ export function Hero() {
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentWord}
-                className="flex items-center justify-center font-display font-black tracking-[-0.04em] uppercase leading-none text-white text-center whitespace-nowrap text-[68px] min-[380px]:text-[80px] sm:text-[100px] md:text-[124px] lg:text-[clamp(9rem,11.5vw,12.5rem)] drop-shadow-[0_10px_35px_rgba(0,0,0,0.85)]"
+                initial={{ y: 36, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: -36, opacity: 0 }}
+                transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+                className="font-display font-black tracking-[-0.04em] uppercase leading-none text-center whitespace-nowrap text-[68px] min-[380px]:text-[80px] sm:text-[100px] md:text-[124px] lg:text-[clamp(9rem,11.5vw,12.5rem)] text-red-glow-shine select-none drop-shadow-[0_10px_35px_rgba(0,0,0,0.85)]"
                 aria-label={currentWord}
               >
-                {characters.map((char, index) => {
-                  if (char === " ") {
-                    return (
-                      <span
-                        key={`space-${index}`}
-                        className="inline-block w-3 sm:w-6 md:w-10 lg:w-14"
-                        aria-hidden="true"
-                      >
-                        &nbsp;
-                      </span>
-                    );
-                  }
-                  return (
-                    <span
-                      key={`${char}-${index}`}
-                      className="inline-flex overflow-hidden h-[1.15em] items-center justify-center py-1"
-                    >
-                      <motion.span
-                        className="inline-block will-change-transform text-white"
-                        initial={{ y: "105%", opacity: 0 }}
-                        animate={{
-                          y: "0%",
-                          opacity: 1,
-                          transition: {
-                            duration: 0.55,
-                            ease: [0.16, 1, 0.3, 1],
-                            delay: index * 0.035,
-                          },
-                        }}
-                        exit={{
-                          y: "-105%",
-                          opacity: 0,
-                          transition: {
-                            duration: 0.4,
-                            ease: [0.16, 1, 0.3, 1],
-                            delay: index * 0.02,
-                          },
-                        }}
-                      >
-                        {char}
-                      </motion.span>
-                    </span>
-                  );
-                })}
+                {currentWord}
               </motion.div>
             </AnimatePresence>
-
-            {/* Metallic Red Shimmer Sweep Beam Overlay (Multiplies with white text to produce rich red shine) */}
-            <div
-              className="absolute inset-0 pointer-events-none select-none z-10 overflow-hidden mix-blend-multiply flex items-center justify-center"
-              aria-hidden="true"
-            >
-              <div className="w-[200%] h-full animate-beam-sweep flex items-center justify-center">
-                <div className="w-28 sm:w-44 lg:w-64 h-full bg-gradient-to-r from-white via-accent-red to-white transform -skew-x-20 opacity-95" />
-              </div>
-            </div>
           </div>
         </div>
 

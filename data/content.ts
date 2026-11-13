@@ -9,6 +9,7 @@ export interface Project {
   number: string;
   title: string;
   category: string;
+  platform: "mobile" | "web";
   problem: string;
   role: string;
   stack: string;
@@ -16,6 +17,7 @@ export interface Project {
   result: string;
   featured?: boolean;
   coverImage: string;
+  secondaryImage?: string;
   galleryImages: ProjectImage[];
   previewType: "village" | "notes" | "nusa" | "farm";
   links: {
@@ -139,6 +141,7 @@ export const content: PortfolioContent = {
       number: "01",
       title: "Satu Desa",
       category: "Civic Technology",
+      platform: "mobile",
       problem:
         "Menyatukan layanan administrasi kependudukan, publikasi informasi resmi, dan pemetaan potensi desa dalam satu aplikasi mobile yang mudah diakses warga.",
       role: "Full-Stack Developer",
@@ -148,6 +151,7 @@ export const content: PortfolioContent = {
       featured: true,
       previewType: "village",
       coverImage: "/projects/satu-desa/home.png",
+      secondaryImage: "/projects/satu-desa/layanan-surat.png",
       galleryImages: [
         {
           url: "/projects/satu-desa/home.png",
@@ -156,7 +160,7 @@ export const content: PortfolioContent = {
         },
         {
           url: "/projects/satu-desa/layanan-surat.png",
-          caption: "Alur Formulir Pengajuan Dokumen Administrasi Kependudukan",
+          caption: "Formulir Pengajuan Dokumen Administrasi Kependudukan",
           alt: "Formulir permohonan surat administrasi warga Satu Desa",
         },
         {
@@ -166,17 +170,17 @@ export const content: PortfolioContent = {
         },
         {
           url: "/projects/satu-desa/kabar-desa.png",
-          caption: "Feed Publikasi Berita dan Agenda Kegiatan Resmi Kelurahan",
+          caption: "Publikasi Berita dan Agenda Kegiatan Resmi Kelurahan",
           alt: "Feed kabar dan pengumuman resmi warga desa",
         },
         {
           url: "/projects/satu-desa/detail-kabar-desa.png",
-          caption: "Tampilan Detail Berita dengan Dokumentasi Kegiatan Warga",
+          caption: "Tampilan Detail Berita & Dokumentasi Kegiatan Warga",
           alt: "Detail kabar desa Satu Desa",
         },
         {
           url: "/projects/satu-desa/bayar-sampah.png",
-          caption: "Modul Pembayaran Retribusi Iuran Sampah & Layanan Publik",
+          caption: "Pembayaran Retribusi Iuran Sampah & Layanan Publik",
           alt: "Antarmuka pembayaran retribusi kebersihan desa",
         },
       ],
@@ -196,7 +200,7 @@ export const content: PortfolioContent = {
         roleDescription:
           "Bertindak sebagai Full-Stack Developer: merancang alur interaksi dan desain antarmuka di Figma, membangun aplikasi klien berbasis Flutter, merancang skema relasional di MySQL, dan mengimplementasikan seluruh endpoint REST API di backend Laravel.",
         keyFeatures: [
-          "Pengajuan surat pengantar dan dokumen kependudukan secara digital tanpa harus datang ke balai desa.",
+          "Pengajuan surat pengantar dan dokumen kependudukan secara digital tanpa antrean fisik.",
           "Modul transparansi APBDes dan alokasi dana pembangunan desa secara transparan.",
           "Sistem pembayaran retribusi dan iuran sampah berkala bagi warga.",
           "Pusat informasi berita, agenda sosialisasi, dan pengumuman penting pemerintah desa.",
@@ -217,6 +221,7 @@ export const content: PortfolioContent = {
       number: "02",
       title: "Notula",
       category: "Productivity",
+      platform: "mobile",
       problem:
         "Mengubah rekaman suara dan percakapan rapat yang panjang menjadi notulensi terstruktur, pembagian action items, serta ekspor berkas .docx otomatis.",
       role: "Full-Stack Developer",
@@ -225,6 +230,7 @@ export const content: PortfolioContent = {
       result: "Alur dokumentasi rapat terorganisir dengan mekanisme unggah audio tahan putus koneksi.",
       previewType: "notes",
       coverImage: "/projects/notula/02-home.png",
+      secondaryImage: "/projects/notula/04-recording.png",
       galleryImages: [
         {
           url: "/projects/notula/02-home.png",
@@ -233,7 +239,7 @@ export const content: PortfolioContent = {
         },
         {
           url: "/projects/notula/04-recording.png",
-          caption: "Antarmuka Perekaman Audio Rapat dengan Visual Gelombang Suara",
+          caption: "Perekaman Audio Rapat dengan Visual Gelombang Suara",
           alt: "Layar perekaman suara audio Notula",
         },
         {
@@ -258,13 +264,28 @@ export const content: PortfolioContent = {
         },
         {
           url: "/projects/notula/10-editor.png",
-          caption: "Editor Teks Interaktif untuk Penyesuaian Risalah Sebelum Ekspor",
+          caption: "Editor Teks Interaktif untuk Penyesuaian Risalah Rapat",
           alt: "Editor catatan hasil rapat Notula",
         },
         {
           url: "/projects/notula/11-detail.png",
           caption: "Pratinjau Dokumen Siap Cetak dan Ekspor Format .docx",
           alt: "Detail berkas risalah dan tombol ekspor .docx",
+        },
+        {
+          url: "/projects/notula/01-role.png",
+          caption: "Pemilihan Peran & Profil Peserta Rapat",
+          alt: "Layar pemilihan peran Notula",
+        },
+        {
+          url: "/projects/notula/03-prepare.png",
+          caption: "Persiapan Agenda Sebelum Rapat Dimulai",
+          alt: "Layar persiapan agenda Notula",
+        },
+        {
+          url: "/projects/notula/07-clarify.png",
+          caption: "Klarifikasi dan Verifikasi Poin Notulensi",
+          alt: "Layar klarifikasi transkrip Notula",
         },
       ],
       links: [
@@ -304,6 +325,7 @@ export const content: PortfolioContent = {
       number: "03",
       title: "NUSAVERSE",
       category: "Edutech & Culture",
+      platform: "web",
       problem:
         "Menyajikan kekayaan budaya 34 provinsi Nusantara melalui platform digital interaktif untuk kompetisi BytesFest 2026 yang mendukung agenda SDG 11.",
       role: "Frontend Developer",
@@ -371,6 +393,7 @@ export const content: PortfolioContent = {
       number: "04",
       title: "LadangNusa",
       category: "Agritech & AI",
+      platform: "web",
       problem:
         "Membantu petani mencatat siklus tanam, menganalisis produktivitas lahan, dan memproyeksikan hasil panen dengan bantuan pemodelan cerdas tanpa alur yang rumit.",
       role: "Full-Stack Developer",
@@ -485,8 +508,8 @@ export const content: PortfolioContent = {
     },
     linkedin: {
       label: "LinkedIn",
-      url: "https://linkedin.com/in/muhammad-firdan-azhari",
-      display: "linkedin.com/in/muhammad-firdan-azhari [ISI]",
+      url: "https://www.linkedin.com/in/muhammad-firdan-azhari-5a8342270/",
+      display: "linkedin.com/in/muhammad-firdan-azhari-5a8342270",
     },
     location: "Kudus, Jawa Tengah, Indonesia",
   },

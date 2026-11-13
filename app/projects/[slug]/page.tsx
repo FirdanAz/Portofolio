@@ -85,9 +85,12 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
             <span>Kembali ke Beranda</span>
           </Link>
 
-          <span className="font-mono text-[10px] uppercase tracking-wider text-ink-muted">
-            STUDI KASUS / {project.number}
-          </span>
+          <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-wider text-ink-muted">
+            <span className="px-2 py-0.5 border border-line bg-paper-pure text-ink">
+              {project.platform === "mobile" ? "Mobile App" : "Web Platform"}
+            </span>
+            <span>STUDI KASUS / {project.number}</span>
+          </div>
         </div>
 
         {/* Project Header */}
@@ -118,10 +121,10 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
             </div>
             <div>
               <span className="block font-mono text-[8px] uppercase tracking-wider text-ink-muted mb-1">
-                Kategori
+                Platform &amp; Kategori
               </span>
               <b className="text-[12px] sm:text-[13px] font-semibold text-ink">
-                {project.category}
+                {project.platform === "mobile" ? "Mobile" : "Web"} · {project.category}
               </b>
             </div>
             <div>
@@ -143,7 +146,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
           </div>
         </header>
 
-        {/* Hero Visual Showcase */}
+        {/* Hero Visual Showcase — Customized by Platform */}
         <section
           className="py-12 lg:py-16 border-b border-ink"
           aria-labelledby="preview-heading"
@@ -151,20 +154,94 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
           <h2 id="preview-heading" className="sr-only">
             Visual Antarmuka Utama Proyek
           </h2>
-          <div className="max-w-[1100px] mx-auto border border-ink bg-paper-card p-4 sm:p-8">
-            <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] border border-ink overflow-hidden bg-paper-pure shadow-sm">
-              <Image
-                src={project.coverImage}
-                alt={`Tangkapan layar antarmuka utama ${project.title}`}
-                fill
-                priority
-                className="object-cover object-top"
-                sizes="(max-width: 1200px) 100vw, 1100px"
-              />
+
+          {project.platform === "mobile" ? (
+            /* Multi-Device Smartphone Showcase for Mobile Apps */
+            <div className="max-w-[1100px] mx-auto border border-ink bg-[#E8EFE8] py-10 px-4 sm:px-8">
+              <div className="flex items-center justify-center gap-4 sm:gap-8 overflow-hidden">
+                {/* Main Screen */}
+                <div className="w-[185px] sm:w-[230px] aspect-[9/19] rounded-[28px] sm:rounded-[34px] border-[3.5px] border-ink bg-paper-pure shadow-lg overflow-hidden relative shrink-0">
+                  <div
+                    className="absolute top-2.5 left-1/2 -translate-x-1/2 w-14 h-3 bg-ink rounded-full z-10"
+                    aria-hidden="true"
+                  />
+                  <Image
+                    src={project.coverImage}
+                    alt={`Tangkapan layar antarmuka utama ${project.title}`}
+                    fill
+                    priority
+                    className="object-cover object-top"
+                    sizes="(max-width: 640px) 185px, 230px"
+                  />
+                </div>
+
+                {/* Second Feature Screen */}
+                {project.secondaryImage && (
+                  <div className="w-[185px] sm:w-[220px] aspect-[9/19] rounded-[28px] sm:rounded-[34px] border-[3px] border-ink/80 bg-paper-pure shadow-md overflow-hidden relative shrink-0">
+                    <div
+                      className="absolute top-2.5 left-1/2 -translate-x-1/2 w-14 h-3 bg-ink/80 rounded-full z-10"
+                      aria-hidden="true"
+                    />
+                    <Image
+                      src={project.secondaryImage}
+                      alt={`Tangkapan layar fitur kedua ${project.title}`}
+                      fill
+                      className="object-cover object-top"
+                      sizes="(max-width: 640px) 185px, 220px"
+                    />
+                  </div>
+                )}
+
+                {/* Third Feature Screen on larger screens */}
+                {project.galleryImages.length > 2 && (
+                  <div className="hidden md:block w-[205px] aspect-[9/19] rounded-[34px] border-[3px] border-ink/60 bg-paper-pure shadow-sm overflow-hidden relative opacity-90 shrink-0">
+                    <div
+                      className="absolute top-2.5 left-1/2 -translate-x-1/2 w-14 h-3 bg-ink/60 rounded-full z-10"
+                      aria-hidden="true"
+                    />
+                    <Image
+                      src={project.galleryImages[2].url}
+                      alt={`Tangkapan layar fitur ketiga ${project.title}`}
+                      fill
+                      className="object-cover object-top"
+                      sizes="205px"
+                    />
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
+          ) : (
+            /* Desktop Web Browser Showcase */
+            <div className="max-w-[1100px] mx-auto border border-ink bg-paper-card p-4 sm:p-8">
+              <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] border border-ink overflow-hidden bg-paper-pure shadow-sm">
+                <div
+                  className="h-6 bg-paper-muted border-b border-ink/20 px-3 flex items-center gap-1.5"
+                  aria-hidden="true"
+                >
+                  <span className="w-2 h-2 rounded-full bg-ink/40" />
+                  <span className="w-2 h-2 rounded-full bg-ink/40" />
+                  <span className="w-2 h-2 rounded-full bg-ink/40" />
+                  <span className="ml-4 text-[9px] font-mono text-ink-muted">
+                    https://{project.slug}.app
+                  </span>
+                </div>
+                <div className="relative w-full h-[calc(100%-24px)]">
+                  <Image
+                    src={project.coverImage}
+                    alt={`Tangkapan layar antarmuka utama ${project.title}`}
+                    fill
+                    priority
+                    className="object-cover object-top"
+                    sizes="(max-width: 1200px) 100vw, 1100px"
+                  />
+                </div>
+              </div>
+            </div>
+          )}
+
           <p className="font-mono text-[9px] uppercase tracking-wider text-ink-muted text-center mt-4">
-            FIG. {project.number} — TAMPILAN UTAMA ANTARMUKA {project.title.toUpperCase()}
+            FIG. {project.number} — REPRESENTASI ANTARMUKA {project.title.toUpperCase()} (
+            {project.platform === "mobile" ? "APLIKASI MOBILE FLUTTER" : "PLATFORM WEB NEXT.JS"})
           </p>
         </section>
 
@@ -283,7 +360,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
               </div>
             </section>
 
-            {/* 06: Full Screenshot Gallery */}
+            {/* 06: Full Screenshot Gallery — Tailored for Mobile vs Web */}
             {project.galleryImages.length > 0 && (
               <section aria-labelledby="gallery-heading">
                 <div className="flex items-center gap-3 mb-4">
@@ -298,34 +375,69 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                   </h2>
                 </div>
                 <p className="text-[13px] text-ink-muted mb-6">
-                  Dokumentasi visual tangkapan layar antarmuka dari aplikasi riil
-                  yang dikembangkan:
+                  {project.platform === "mobile"
+                    ? "Tangkapan layar antarmuka aplikasi mobile dengan rasio layar smartphone utuh:"
+                    : "Dokumentasi visual tangkapan layar antarmuka dari platform web yang dikembangkan:"}
                 </p>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {project.galleryImages.map((img, idx) => (
-                    <figure
-                      key={img.url + idx}
-                      className="border border-ink bg-paper-pure p-3 flex flex-col justify-between"
-                    >
-                      <div className="relative w-full aspect-[16/10] border border-line overflow-hidden bg-paper-muted">
-                        <Image
-                          src={img.url}
-                          alt={img.alt}
-                          fill
-                          className="object-cover object-top hover:scale-[1.02] transition-transform duration-300"
-                          sizes="(max-width: 768px) 100vw, 500px"
-                        />
-                      </div>
-                      <figcaption className="pt-3 font-mono text-[8px] uppercase tracking-wider text-ink-subtle">
-                        <b className="text-teal font-bold mr-1.5">
-                          #{idx + 1}
-                        </b>
-                        <span>{img.caption}</span>
-                      </figcaption>
-                    </figure>
-                  ))}
-                </div>
+                {project.platform === "mobile" ? (
+                  /* Mobile Gallery: 4 columns on large, 3 on tablet, 2 on phone with smartphone portrait ratio */
+                  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+                    {project.galleryImages.map((img, idx) => (
+                      <figure
+                        key={img.url + idx}
+                        className="border border-ink bg-paper-pure p-3 flex flex-col justify-between group hover:border-teal-dark transition-colors"
+                      >
+                        <div className="w-full aspect-[9/18.5] border border-ink/80 rounded-[20px] overflow-hidden relative bg-paper-muted shadow-sm">
+                          {/* Mini Notch */}
+                          <div
+                            className="absolute top-1.5 left-1/2 -translate-x-1/2 w-8 h-1.5 bg-ink/80 rounded-full z-10"
+                            aria-hidden="true"
+                          />
+                          <Image
+                            src={img.url}
+                            alt={img.alt}
+                            fill
+                            className="object-cover object-top group-hover:scale-[1.02] transition-transform duration-300"
+                            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                          />
+                        </div>
+                        <figcaption className="pt-3 font-mono text-[8px] uppercase tracking-wider text-ink-subtle">
+                          <b className="text-teal font-bold mr-1.5">
+                            #{idx + 1}
+                          </b>
+                          <span>{img.caption}</span>
+                        </figcaption>
+                      </figure>
+                    ))}
+                  </div>
+                ) : (
+                  /* Web Gallery: 2 columns with landscape ratio */
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {project.galleryImages.map((img, idx) => (
+                      <figure
+                        key={img.url + idx}
+                        className="border border-ink bg-paper-pure p-3 flex flex-col justify-between group hover:border-teal-dark transition-colors"
+                      >
+                        <div className="relative w-full aspect-[16/10] border border-line overflow-hidden bg-paper-muted">
+                          <Image
+                            src={img.url}
+                            alt={img.alt}
+                            fill
+                            className="object-cover object-top group-hover:scale-[1.02] transition-transform duration-300"
+                            sizes="(max-width: 768px) 100vw, 500px"
+                          />
+                        </div>
+                        <figcaption className="pt-3 font-mono text-[8px] uppercase tracking-wider text-ink-subtle">
+                          <b className="text-teal font-bold mr-1.5">
+                            #{idx + 1}
+                          </b>
+                          <span>{img.caption}</span>
+                        </figcaption>
+                      </figure>
+                    ))}
+                  </div>
+                )}
               </section>
             )}
           </div>

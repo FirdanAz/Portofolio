@@ -10,52 +10,38 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        paper: {
-          DEFAULT: "#F3F0E8",
-          pure: "#FFFDF7",
-          muted: "#E8E4DA",
-          card: "#EFECE4",
+        dark: {
+          DEFAULT: "#050505",
+          surface: "#0D0D0D",
+          card: "#121212",
+          cardHover: "#181818",
         },
-        ink: {
-          DEFAULT: "#0B1B33",
-          light: "#15233A",
-          muted: "#596273",
-          subtle: "#303B4C",
-          faint: "#8C96A5",
+        "accent-red": {
+          DEFAULT: "#E11D2E",
+          hover: "#C81423",
+          glow: "rgba(225, 29, 46, 0.35)",
         },
-        teal: {
-          DEFAULT: "#2DD4BF",
-          accent: "#2DD4BF",
-          dark: "#20BCA8",
+        "panel-light": {
+          DEFAULT: "#F4F4F4",
+          card: "#FFFFFF",
+          muted: "#E5E5E5",
         },
-        line: {
-          DEFAULT: "rgba(11, 27, 51, 0.22)",
-          subtle: "rgba(11, 27, 51, 0.12)",
-          heavy: "rgba(11, 27, 51, 0.85)",
-        },
-      },
-      spacing: {
-        "gutter-desktop": "48px",
-        "gutter-mobile": "22px",
-        "section-desktop": "92px",
-        "section-mobile": "68px",
-        "18": "4.5rem",
-        "22": "5.5rem",
-        "26": "6.5rem",
-        "30": "7.5rem",
+        "border-subtle": "rgba(255, 255, 255, 0.08)",
+        "border-light": "rgba(0, 0, 0, 0.08)",
       },
       fontFamily: {
-        display: ["var(--font-display)", "serif"],
-        sans: ["var(--font-sans)", "sans-serif"],
+        display: ["var(--font-display)", "sans-serif"],
         mono: ["var(--font-mono)", "monospace"],
-      },
-      fontSize: {
-        "2xs": ["0.625rem", { lineHeight: "0.875rem" }],
-        "3xs": ["0.5625rem", { lineHeight: "0.75rem" }],
+        sans: ["var(--font-sans)", "sans-serif"],
       },
       letterSpacing: {
-        widest: "0.14em",
-        widester: "0.18em",
+        tightest: "-0.04em",
+        tighter: "-0.02em",
+        widestMono: "0.22em",
+        wideMono: "0.15em",
+      },
+      borderRadius: {
+        "panel-top": "100px",
       },
       maxWidth: {
         shell: "1600px",
@@ -66,4 +52,3 @@ const config: Config = {
 };
 
 export default config;
-

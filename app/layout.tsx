@@ -1,23 +1,24 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Manrope, IBM_Plex_Mono } from "next/font/google";
+import { Poppins, Space_Mono, Inter } from "next/font/google";
 import "./globals.css";
 
-const fraunces = Fraunces({
+const poppins = Poppins({
   subsets: ["latin"],
+  weight: ["700", "800", "900"],
   variable: "--font-display",
   display: "swap",
 });
 
-const manrope = Manrope({
+const spaceMono = Space_Mono({
   subsets: ["latin"],
-  variable: "--font-sans",
+  weight: ["400", "700"],
+  variable: "--font-mono",
   display: "swap",
 });
 
-const ibmPlexMono = IBM_Plex_Mono({
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-mono",
+  variable: "--font-sans",
   display: "swap",
 });
 
@@ -28,26 +29,23 @@ export const metadata: Metadata = {
     template: "%s | Muhammad Firdan Azhari",
   },
   description:
-    "Portofolio Muhammad Firdan Azhari. Full-Stack Developer spesialis Flutter, Laravel, dan Next.js berbasis di Kudus, Jawa Tengah. Membangun produk digital dari rancangan UI hingga API dan rilis.",
+    "Portfolio of Muhammad Firdan Azhari. Full-Stack Developer specializing in Flutter, Laravel, and Next.js based in Kudus, Indonesia.",
   keywords: [
     "Muhammad Firdan Azhari",
     "Full-Stack Developer",
     "Flutter Developer",
     "Laravel Developer",
     "Next.js Developer",
+    "Software Engineer",
     "Kudus",
-    "Web Developer Indonesia",
-    "Satu Desa",
-    "Notula",
-    "NUSAVERSE",
-    "LadangNusa",
+    "Indonesia",
   ],
   authors: [{ name: "Muhammad Firdan Azhari" }],
   creator: "Muhammad Firdan Azhari",
   openGraph: {
     title: "Muhammad Firdan Azhari — Full-Stack Developer",
     description:
-      "Full-Stack Developer (Flutter, Laravel, Next.js). Membangun produk dari rancangan UI hingga API dan rilis. Juara 3 Nasional GENETIC 2025.",
+      "Full-Stack Developer (Flutter, Laravel, Next.js). Dark editorial portfolio with high performance and clean code.",
     url: "https://firdanazhari.vercel.app",
     siteName: "Muhammad Firdan Azhari Portfolio",
     locale: "id_ID",
@@ -56,8 +54,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Muhammad Firdan Azhari — Full-Stack Developer",
-    description:
-      "Full-Stack Developer (Flutter, Laravel, Next.js). Juara 3 Nasional GENETIC 2025.",
+    description: "Full-Stack Developer (Flutter, Laravel, Next.js).",
   },
   robots: {
     index: true,
@@ -70,8 +67,8 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#F3F0E8",
-  colorScheme: "light",
+  themeColor: "#050505",
+  colorScheme: "dark",
   width: "device-width",
   initialScale: 1,
 };
@@ -84,12 +81,11 @@ export default function RootLayout({
   return (
     <html
       lang="id"
-      className={`${fraunces.variable} ${manrope.variable} ${ibmPlexMono.variable}`}
+      className={`${poppins.variable} ${spaceMono.variable} ${inter.variable} scroll-smooth`}
     >
-      <body className="bg-paper text-ink font-sans antialiased min-h-screen selection:bg-teal selection:text-ink">
+      <body className="bg-dark text-white font-sans antialiased min-h-screen selection:bg-accent-red selection:text-white overflow-x-hidden">
         {children}
       </body>
     </html>
   );
 }
-

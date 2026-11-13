@@ -8,17 +8,26 @@ import { Footer } from "@/components/Footer";
 
 export default function Home() {
   return (
-    <div className="max-w-shell mx-auto px-5 sm:px-8 lg:px-12 fade-in-section">
+    <div className="bg-dark text-white min-h-screen relative selection:bg-accent-red selection:text-white">
       <Header />
-      <main id="top" tabIndex={-1}>
-        <Hero />
-        <ProjectList />
-        <Experience />
-        <About />
-        <Contact />
+      <main id="home" tabIndex={-1} className="relative z-10 pt-20">
+        <div className="max-w-[1500px] mx-auto px-5 sm:px-8 lg:px-12">
+          <Hero />
+          <div id="project">
+            <ProjectList />
+          </div>
+          <div id="experience">
+            <Experience />
+          </div>
+          <div id="about">
+            <About />
+          </div>
+          <div id="contact">
+            <Contact />
+          </div>
+        </div>
       </main>
       <Footer />
     </div>
   );
 }
-

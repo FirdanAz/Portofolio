@@ -1,84 +1,232 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 import { content } from "@/data/content";
+import { ParticleBackground } from "./ParticleBackground";
 
 export function Hero() {
   const { profile } = content;
   const { sellingProposition, quickFacts } = profile;
 
+  // Alternating typography: "M FIRDAN" and "AZHARI"
+  const words = ["M FIRDAN", "AZHARI"];
+  const [wordIndex, setWordIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setWordIndex((prev) => (prev + 1) % words.length);
+    }, 3400);
+    return () => clearInterval(timer);
+  }, [words.length]);
+
+  const currentWord = words[wordIndex];
+  const characters = currentWord.split("");
+
+  // Mouse parallax state (desktop only, disabled on reduced motion)
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [isReducedMotion, setIsReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setIsReducedMotion(mq.matches);
+
+    const handleMotionChange = (e: MediaQueryListEvent) => {
+      setIsReducedMotion(e.matches);
+    };
+    mq.addEventListener("change", handleMotionChange);
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (mq.matches || window.innerWidth < 1024) return;
+      const { innerWidth, innerHeight } = window;
+      const normX = (e.clientX / innerWidth - 0.5) * 2;
+      const normY = (e.clientY / innerHeight - 0.5) * 2;
+      setMousePos({
+        x: Math.round(normX * 12),
+        y: Math.round(normY * 12),
+      });
+    };
+
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      mq.removeEventListener("change", handleMotionChange);
+    };
+  }, []);
+
   return (
     <section
-      className="grid grid-cols-1 lg:grid-cols-[13%_64%_23%] border-b border-ink relative"
-      aria-labelledby="hero-title"
+      className="relative w-full overflow-hidden bg-dark text-white border-b border-white/[0.08]"
+      aria-label="Hero Section"
     >
-      {/* Vertical sidebar index */}
-      <div className="hidden lg:flex flex-col justify-start pt-11 text-[9px] font-mono tracking-widest text-ink-muted [writing-mode:vertical-rl] rotate-180 select-none">
-        PORTFOLIO / 2025
-      </div>
+      {/* Background Red Floating Particles */}
+      <ParticleBackground />
 
-      {/* Main hero content */}
-      <div className="pt-12 pb-10 lg:pt-24 lg:pb-20 lg:pr-12 lg:border-r border-line">
-        <p className="flex items-center gap-2.5 font-mono text-[10px] lg:text-[11px] font-semibold uppercase tracking-widest text-ink mb-6 lg:mb-8">
-          <span
-            className="w-2 h-2 bg-teal inline-block shrink-0"
-            aria-hidden="true"
-          />
-          <span>{profile.availability}</span>
-        </p>
+      {/* Hero Visual Stage: Giant Typography + Glow + Cutout */}
+      <div className="relative w-full h-[68vh] min-h-[480px] max-h-[820px] sm:h-[72vh] lg:h-[78vh] flex items-center justify-center overflow-hidden">
+        {/* Eyebrow Label & Availability (Top Center/Left) */}
+        <div className="absolute top-4 sm:top-6 inset-x-0 z-30 flex items-center justify-between max-w-[1500px] mx-auto px-5 sm:px-8 lg:px-12 pointer-events-none">
+          <div className="flex items-center gap-2 font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.22em] text-accent-red font-bold">
+            <span>[ 01 . PROFILE ]</span>
+          </div>
+          <div className="flex items-center gap-2 font-mono text-[10px] sm:text-[11px] tracking-widest text-white/60">
+            <span
+              className="w-1.5 h-1.5 rounded-full bg-accent-red animate-pulse"
+              aria-hidden="true"
+            />
+            <span className="uppercase">{profile.availability}</span>
+          </div>
+        </div>
 
-        <h1
-          id="hero-title"
-          className="font-display font-semibold text-[44px] sm:text-[58px] lg:text-[clamp(62px,7vw,110px)] leading-[0.92] lg:leading-[0.88] tracking-[-0.05em] text-ink max-w-[1000px] mb-8 lg:mb-10"
-        >
-          {sellingProposition.headline}{" "}
-          <em className="italic font-normal text-teal">
-            {sellingProposition.accent}
-          </em>
-        </h1>
-
-        <p className="max-w-[620px] text-[14px] sm:text-[16px] leading-[1.75] text-ink-subtle">
-          {sellingProposition.paragraph}
-        </p>
-      </div>
-
-      {/* Right margin aside */}
-      <div className="hidden lg:flex flex-col justify-between pt-24 pl-9 relative">
-        <p className="font-display italic text-[15px] leading-[1.45] text-ink max-w-[190px]">
-          {sellingProposition.note}
-        </p>
-        <span
-          className="absolute right-0 bottom-7 text-teal font-mono text-[12px] tracking-wider"
+        {/* Ambient Radial Red Glow Orb (behind cutout & text) */}
+        <div
+          className="absolute left-1/2 top-[46%] -translate-x-1/2 -translate-y-1/2 w-[320px] h-[320px] sm:w-[500px] sm:h-[500px] lg:w-[680px] lg:h-[680px] rounded-full glow-hero-red blur-3xl opacity-75 pointer-events-none z-[5]"
+          style={{
+            transform: isReducedMotion
+              ? "translate(-50%, -50%)"
+              : `translate(calc(-50% - ${mousePos.x * 0.6}px), calc(-50% - ${mousePos.y * 0.6}px))`,
+            transition: "transform 0.25s cubic-bezier(0.2, 0, 0, 1)",
+          }}
           aria-hidden="true"
+        />
+
+        {/* Layer 1 (z-10): Giant Alternating Typography ("M FIRDAN" / "AZHARI") */}
+        <div className="absolute inset-x-0 top-[30%] sm:top-[28%] lg:top-[26%] -translate-y-1/2 z-10 flex items-center justify-center select-none pointer-events-none px-4">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentWord}
+              className="flex items-center justify-center font-display font-black tracking-[-0.04em] uppercase leading-none text-white text-center text-[clamp(3.8rem,13vw,14rem)]"
+              aria-label={currentWord}
+            >
+              {characters.map((char, index) => {
+                if (char === " ") {
+                  return (
+                    <span
+                      key={`space-${index}`}
+                      className="inline-block w-4 sm:w-8 md:w-12 lg:w-16"
+                    >
+                      &nbsp;
+                    </span>
+                  );
+                }
+                return (
+                  <span
+                    key={`${char}-${index}`}
+                    className="inline-block overflow-hidden py-1 sm:py-2"
+                  >
+                    <motion.span
+                      className="inline-block"
+                      initial={{ y: "115%", opacity: 0 }}
+                      animate={{
+                        y: "0%",
+                        opacity: 1,
+                        transition: {
+                          duration: 0.55,
+                          ease: [0.16, 1, 0.3, 1],
+                          delay: index * 0.04,
+                        },
+                      }}
+                      exit={{
+                        y: "-115%",
+                        opacity: 0,
+                        transition: {
+                          duration: 0.38,
+                          ease: [0.16, 1, 0.3, 1],
+                          delay: index * 0.025,
+                        },
+                      }}
+                    >
+                      {char}
+                    </motion.span>
+                  </span>
+                );
+              })}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        {/* Layer 2 (z-20): Portrait Cutout PNG Overlapping the Letters */}
+        <div
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 z-20 pointer-events-none flex justify-center items-end will-change-transform"
+          style={{
+            transform: isReducedMotion
+              ? "translate(-50%, 0)"
+              : `translate(calc(-50% + ${mousePos.x}px), ${mousePos.y}px)`,
+            transition: "transform 0.15s cubic-bezier(0.2, 0, 0, 1)",
+          }}
         >
-          01—
-        </span>
+          <div className="relative">
+            <Image
+              src="/images/hero-cutout.png"
+              alt={profile.name}
+              width={1086}
+              height={1243}
+              priority
+              unoptimized
+              className="w-[280px] min-[400px]:w-[330px] sm:w-[420px] md:w-[490px] lg:w-[560px] xl:w-[620px] h-auto object-contain object-bottom drop-shadow-[0_24px_48px_rgba(0,0,0,0.9)]"
+            />
+            {/* Seamless bottom fade into #050505 */}
+            <div
+              className="absolute inset-x-0 bottom-0 h-28 sm:h-36 bg-gradient-to-t from-dark via-dark/75 to-transparent pointer-events-none"
+              aria-hidden="true"
+            />
+          </div>
+        </div>
       </div>
 
-      {/* Quick Facts Grid */}
-      <div
-        className="col-span-1 lg:col-start-2 lg:col-end-4 grid grid-cols-1 sm:grid-cols-3 border-t border-line"
-        aria-label="Fakta kualifikasi utama"
-      >
-        {quickFacts.map((fact, index) => (
-          <div
-            key={fact.number}
-            className={`flex items-start gap-4 py-5 sm:py-6 px-4 lg:px-6 border-b sm:border-b-0 border-line ${
-              index < quickFacts.length - 1 ? "sm:border-r border-line" : ""
-            }`}
-          >
-            <b className="font-mono text-[10px] text-teal font-semibold pt-0.5">
-              {fact.number}
-            </b>
-            <div className="flex flex-col leading-tight">
-              <strong className="text-[13px] font-semibold text-ink">
-                {fact.title}
-              </strong>
-              <span className="text-[11px] text-ink-muted mt-1 font-mono">
-                {fact.subtitle}
-              </span>
+      {/* Below Hero Stage: Role Brief, Value Statement & Quick Facts */}
+      <div className="relative z-30 border-t border-white/[0.08] bg-[#070707]/90 backdrop-blur-md">
+        <div className="max-w-[1500px] mx-auto px-5 sm:px-8 lg:px-12 py-10 lg:py-14">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+            {/* Left Column: Role & Selling Value Statement */}
+            <div className="lg:col-span-7 flex flex-col gap-4">
+              <div className="flex items-center gap-3">
+                <span className="font-mono text-[11px] font-bold tracking-[0.25em] text-accent-red uppercase">
+                  {profile.role}
+                </span>
+                <span className="text-white/20 font-mono">/</span>
+                <span className="font-mono text-[11px] tracking-[0.18em] text-white/60 uppercase">
+                  {profile.tagline}
+                </span>
+              </div>
+
+              <h1 className="font-display font-bold text-[28px] sm:text-[38px] lg:text-[44px] leading-[1.08] tracking-[-0.03em] text-white">
+                {sellingProposition.headline}{" "}
+                <em className="italic font-normal text-accent-red not-italic font-display font-bold">
+                  {sellingProposition.accent}
+                </em>
+              </h1>
+
+              <p className="text-[14px] sm:text-[15px] leading-[1.7] text-white/65 max-w-[620px]">
+                {sellingProposition.paragraph}
+              </p>
+            </div>
+
+            {/* Right Column: 3 Quick Facts Cards */}
+            <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-3.5">
+              {quickFacts.map((fact) => (
+                <div
+                  key={fact.number}
+                  className="flex items-start gap-4 p-4 rounded-[4px] border border-white/[0.08] bg-[#0C0C0C] hover:border-accent-red/40 transition-colors"
+                >
+                  <span className="font-mono text-[11px] font-bold tracking-widest text-accent-red pt-0.5">
+                    [{fact.number}]
+                  </span>
+                  <div className="flex flex-col">
+                    <strong className="text-[14px] font-bold text-white tracking-tight">
+                      {fact.title}
+                    </strong>
+                    <span className="text-[11px] font-mono tracking-wider text-white/50 mt-0.5">
+                      {fact.subtitle}
+                    </span>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-        ))}
+        </div>
       </div>
     </section>
   );
 }
-

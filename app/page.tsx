@@ -11,8 +11,8 @@ export default function Home() {
     <div className="bg-dark text-white min-h-screen relative selection:bg-accent-red selection:text-white">
       <Header />
       <main id="home" tabIndex={-1} className="relative z-10 pt-20">
+        <Hero />
         <div className="max-w-[1500px] mx-auto px-5 sm:px-8 lg:px-12">
-          <Hero />
           <div id="project">
             <ProjectList />
           </div>

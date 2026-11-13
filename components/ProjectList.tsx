@@ -1,51 +1,52 @@
+"use client";
+
 import { content } from "@/data/content";
 import { ProjectItem } from "./ProjectItem";
 
 export function ProjectList() {
   const { projects } = content;
-  const featuredProject = projects[0];
-  const otherProjects = projects.slice(1);
 
   return (
     <section
-      id="proyek"
-      className="py-16 lg:py-24 border-b border-ink"
+      id="project"
+      className="py-20 lg:py-32 border-b border-white/[0.08] relative overflow-hidden"
       aria-labelledby="projects-title"
     >
-      {/* Section Header */}
-      <div className="grid grid-cols-1 lg:grid-cols-[13%_51%_36%] items-end mb-12 lg:mb-16 gap-6 lg:gap-0">
-        <span className="font-mono text-[11px] font-semibold text-teal self-start">
-          01
-        </span>
-        <div>
-          <p className="font-mono text-[9px] uppercase tracking-widest text-ink-muted mb-2.5">
-            SELECTED WORK / 2024—2025
-          </p>
-          <h2
-            id="projects-title"
-            className="font-display font-semibold text-[38px] sm:text-[50px] lg:text-[68px] leading-none tracking-tight text-ink"
-          >
-            Proyek terpilih
-          </h2>
-        </div>
-        <p className="text-[13px] leading-[1.7] text-ink-muted max-w-[340px] lg:justify-self-end">
-          Empat produk yang menunjukkan cara saya bekerja dari perumusan masalah,
-          rancangan arsitektur, hingga implementasi kode dan hasil nyata.
-        </p>
+      {/* Faint Giant Background Watermark */}
+      <div
+        className="absolute top-8 right-0 font-display font-black text-[clamp(6rem,18vw,20rem)] uppercase tracking-tighter text-white/[0.025] select-none pointer-events-none leading-none z-0"
+        aria-hidden="true"
+      >
+        SELECTED
       </div>
 
-      {/* Featured Project (01) */}
-      {featuredProject && (
-        <ProjectItem project={featuredProject} isFeatured={true} />
-      )}
+      <div className="relative z-10">
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 lg:mb-16 gap-6">
+          <div>
+            <div className="flex items-center gap-2 font-mono text-[11px] font-bold tracking-[0.25em] text-accent-red uppercase mb-3">
+              <span>[ 02 . SELECTED ]</span>
+            </div>
+            <h2
+              id="projects-title"
+              className="font-display font-black text-[42px] sm:text-[54px] lg:text-[68px] leading-[0.95] tracking-tight uppercase text-white"
+            >
+              ARCHIVED <span className="text-accent-red italic font-normal">WORKS</span>
+            </h2>
+          </div>
 
-      {/* Secondary Projects Grid (02, 03, 04) */}
-      <div className="grid grid-cols-1 md:grid-cols-3 border-b border-ink">
-        {otherProjects.map((project) => (
-          <ProjectItem key={project.slug} project={project} isFeatured={false} />
-        ))}
+          <p className="text-[14px] sm:text-[15px] leading-[1.7] text-white/60 max-w-[440px] font-sans">
+            Empat produk rekayasa perangkat lunak terpilih: dari perumusan masalah, arsitektur modul, hingga implementasi produksi siap pakai.
+          </p>
+        </div>
+
+        {/* 2-Column Responsive Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-7 lg:gap-8">
+          {projects.map((project) => (
+            <ProjectItem key={project.slug} project={project} />
+          ))}
+        </div>
       </div>
     </section>
   );
 }
-

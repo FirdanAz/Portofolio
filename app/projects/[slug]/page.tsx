@@ -71,18 +71,18 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
 
       <main className="py-10 lg:py-16">
         {/* Navigation Breadcrumb / Back Link */}
-        <div className="flex items-center justify-between pb-8 border-b border-line">
+        <div className="flex items-center justify-between pb-8 border-b border-white/[0.08]">
           <Link
-            href="/#proyek"
-            className="font-mono text-[10px] uppercase tracking-wider text-ink font-semibold inline-flex items-center gap-2 hover:text-teal-dark transition-colors group"
+            href="/#project"
+            className="font-mono text-[11px] uppercase tracking-wider text-white/80 font-bold inline-flex items-center gap-2 hover:text-accent-red transition-colors group"
           >
             <span
               aria-hidden="true"
-              className="text-teal font-sans group-hover:-translate-x-1 transition-transform"
+              className="text-accent-red font-sans group-hover:-translate-x-1 transition-transform"
             >
               ←
             </span>
-            <span>Kembali ke Beranda</span>
+            <span>KEMBALI KE BERANDA</span>
           </Link>
 
           <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-wider text-ink-muted">
